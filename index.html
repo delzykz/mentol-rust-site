@@ -196,6 +196,24 @@
             display: inline-block;
             box-shadow: 0 0 6px #2ecc71;
         }
+        .clickable-map {
+            display: inline-block;
+            margin-top: 20px;
+            background: rgba(46, 204, 113, 0.15);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+            text-decoration: none;
+            color: #a5e0bc;
+            border: 1px solid #2ecc7140;
+        }
+        .clickable-map:hover {
+            background: #2ecc7120;
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
 
         section {
             padding: 70px 0;
@@ -282,24 +300,6 @@
             font-weight: 700;
             color: #5efc9a;
         }
-        .map-link {
-            margin-top: 35px;
-            background: #0f1913;
-            border-radius: 48px;
-            padding: 18px 24px;
-            text-align: center;
-            border: 1px solid #2ecc7140;
-        }
-        .map-link a {
-            color: #7ef0a6;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1px dashed #2ecc71;
-        }
-        .map-link a:hover {
-            color: #2ecc71;
-        }
         .footer {
             padding: 40px 0 30px;
             text-align: center;
@@ -376,7 +376,13 @@
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
                 <div class="online-badge"><span class="green-dot"></span> игроков: безлимит</div>
             </div>
-            <p style="font-size:0.85rem; margin-top: 20px;">🧊 Карта Procedural Map | Глобальный вайп с удалением изучений — 4 июня 21:00 МСК</p>
+            <!-- Кликабельная карта вверху (без показа сырой ссылки) -->
+            <div style="margin-top: 20px;">
+                <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer" class="clickable-map">
+                    🗺️ Карта Procedural Map (кликабельно)
+                </a>
+            </div>
+            <p style="font-size:0.85rem; margin-top: 16px;">Глобальный вайп с удалением изучений — 4 июня 21:00 МСК</p>
         </div>
 
         <section id="about">
@@ -398,10 +404,6 @@
                     <h3>♾️ БЕЗ ЛИМИТОВ</h3>
                     <p>• Максимальное количество игроков — не ограничено<br>• Лимит группы — отсутствует<br>• Строгий запрет на читы, но свобода для кланов и соло</p>
                 </div>
-            </div>
-            <div class="map-link">
-                🔗 <strong>Текущая карта (до вайпа 4 июня):</strong><br>
-                <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer">https://rustmaps.com/map/3500_1575511587</a> — кликабельно, открывается в новой вкладке.
             </div>
             <div class="wipe-info">
                 <div>❄️ <strong>Ближайший глобальный вайп (с удалением BP):</strong></div>
@@ -455,11 +457,7 @@
                     <h3>Discord-сообщество</h3>
                     <p>Новости, помощь, общение, репорты</p>
                     <a href="https://discord.gg/9QS89qcPnf" target="_blank" rel="noopener noreferrer" class="discord-link">💬 Присоединиться к Discord</a>
-                    <p style="font-size:12px; margin-top: 12px;">(кликабельная ссылка — ведёт напрямую)</p>
                 </div>
-            </div>
-            <div style="margin-top: 40px; text-align: center; background: rgba(0,0,0,0.3); border-radius: 48px; padding: 18px;">
-                <span>⭐ Рейтинг 4.8 на основе 270 отзывов ⭐</span>
             </div>
         </section>
     </div>
