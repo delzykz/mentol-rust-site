@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mentol Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждый четверг в 21:00 МСК. Без китов, без лимита игроков. Глобальный вайп 4 июня. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
+    <meta name="description" content="Mentol Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждый четверг в 21:00 МСК. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
     <title>Mentol Rust | 2x | Вайп каждый четверг | Без китов и лимитов</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- если добавите favicon -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,13 +144,13 @@
             backdrop-filter: blur(8px);
             border: 1px solid #2ecc7160;
             border-radius: 60px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 16px;
             padding: 8px 20px 8px 28px;
             margin-top: 28px;
             flex-wrap: wrap;
-            justify-content: center;
         }
         .ip-card code {
             font-size: 1.5rem;
@@ -170,7 +170,7 @@
             transition: 0.2s;
             font-family: inherit;
             font-size: 0.9rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
         }
@@ -199,11 +199,11 @@
         }
         .clickable-map {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 24px;
             background: rgba(46, 204, 113, 0.15);
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: 0.2s;
             text-decoration: none;
@@ -249,6 +249,9 @@
             padding: 28px;
             border: 1px solid #2a5a3e;
             transition: 0.25s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .feature-card:hover {
             border-color: #2ecc71;
@@ -262,6 +265,7 @@
         }
         .feature-card p {
             color: #c8ecd9;
+            flex: 1;
         }
 
         .rules-list {
@@ -281,6 +285,7 @@
             font-weight: 800;
             color: #2ecc71;
             font-family: monospace;
+            min-width: 55px;
         }
         .rule-text {
             font-size: 1.05rem;
@@ -295,6 +300,7 @@
             padding: 20px 32px;
             margin-top: 30px;
             border: 1px solid #2ecc71;
+            gap: 15px;
         }
         .wipe-date {
             font-size: 1.4rem;
@@ -312,6 +318,7 @@
             justify-content: center;
             gap: 30px;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
         .social-links a {
             color: #a5e0bc;
@@ -344,8 +351,9 @@
             .section-title { font-size: 1.8rem; }
             .header-content { flex-direction: column; text-align: center; }
             .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
-            .wipe-info { flex-direction: column; gap: 12px; text-align: center; }
+            .wipe-info { flex-direction: column; text-align: center; }
             .rule-item { gap: 12px; }
+            .rule-num { min-width: 45px; font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -377,12 +385,11 @@
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
                 <div class="online-badge"><span class="green-dot"></span> игроков: безлимит</div>
             </div>
-            <div style="margin-top: 20px;">
+            <div>
                 <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer" class="clickable-map">
                     🗺️ Карта Procedural Map (кликабельно)
                 </a>
             </div>
-            <!-- Убрана повторяющаяся надпись о глобальном вайпе -->
         </div>
 
         <section id="about">
@@ -397,7 +404,7 @@
                     <p>• EAC + серверная защита от скриптов<br>• Мгновенная проверка репортов<br>• Честные ивенты: аэродром, вертолёт, атака учёных<br>• Логи всех действий — читерам не место</p>
                 </div>
                 <div class="feature-card">
-                    <h3>📅 ГЛОБАЛЬНЫЙ ВАЙП</h3>
+                    <h3>📅 ВАЙПЫ</h3>
                     <p>• Вайп каждый ЧЕТВЕРГ в 21:00 МСК<br>• <strong>4 июня 2026, 21:00 МСК</strong> — полный сброс карты и ВСЕХ ИЗУЧЕНИЙ<br>• Никаких стартовых китов — всё с нуля</p>
                 </div>
                 <div class="feature-card">
@@ -406,7 +413,7 @@
                 </div>
             </div>
             <div class="wipe-info">
-                <div>❄️ <strong>Ближайший глобальный вайп (с удалением BP):</strong></div>
+                <div>❄️ <strong>Ближайший вайп:</strong></div>
                 <div class="wipe-date">Четверг, 4 июня 2026, 21:00 МСК</div>
                 <div>⏱️ <span id="countdown">обновление...</span></div>
             </div>
@@ -438,17 +445,17 @@
 
         <section id="connect" style="border-bottom: none;">
             <h2 class="section-title">ПОДКЛЮЧАЙСЯ</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: center;">
-                <div style="flex:1; min-width: 220px;">
-                    <h3 style="font-size: 1.6rem;">Консольная команда:</h3>
-                    <code style="background:#121f18; display: inline-block; padding: 16px 24px; border-radius: 20px; margin: 20px 0; font-weight: bold; border-left: 4px solid #2ecc71;">client.connect 213.230.109.15:22015</code>
-                    <p>Нажмите F1 в игре → вставьте команду.<br>✅ Низкий пинг для РФ и СНГ ✅ Rust+ работает</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: stretch;">
+                <div style="flex:1; min-width: 220px; background: #121f18; border-radius: 32px; padding: 28px; text-align: center;">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Консольная команда</h3>
+                    <code style="background:#1c2c22; display: inline-block; padding: 14px 20px; border-radius: 20px; font-weight: bold; border-left: 4px solid #2ecc71; word-break: break-all;">client.connect 213.230.109.15:22015</code>
+                    <p style="margin-top: 20px;">Нажмите F1 в игре → вставьте команду.<br>✅ Низкий пинг для РФ и СНГ ✅ Rust+ работает</p>
                 </div>
                 <div style="flex:1; min-width: 220px; background: #14261d; border-radius: 32px; padding: 28px; text-align: center;">
                     <div style="font-size: 2rem;">🍃</div>
-                    <h3>Discord-сообщество</h3>
+                    <h3 style="margin: 10px 0;">Discord-сообщество</h3>
                     <p>Новости, помощь, общение, репорты</p>
-                    <a href="https://discord.gg/9QS89qcPnf" target="_blank" rel="noopener noreferrer" class="discord-link">💬 Присоединиться к Discord</a>
+                    <a href="https://discord.gg/9QS89qcPnf" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
                 </div>
             </div>
         </section>
