@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Mentol Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждый четверг в 21:00 МСК. Без китов, без лимита игроков. Глобальный вайп 4 июня. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
+    <title>Mentol Rust | 2x | Вайп каждый четверг | Без китов и лимитов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0f0c;
+            font-family: 'Inter', sans-serif;
+            color: #dbefe2;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #162317;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2ecc71;
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .rust-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #1a2a1f, #050a07);
+        }
+        .rust-bg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" opacity="0.06"><path fill="none" d="M0 0 L400 0 L400 300 L0 300 Z" stroke="%232ecc71" stroke-width="0.5"/><path d="M50 20 L80 50 L50 80 L20 50 Z" fill="%232ecc71" opacity="0.2"/><circle cx="300" cy="200" r="12" fill="none" stroke="%232ecc71" stroke-width="1.5"/><path d="M200 150 L220 170 L200 190 L180 170 Z" fill="%231f8a4c" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+        }
+
+        .header {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.4);
+            background: rgba(8, 15, 11, 0.75);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+        }
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #2ecc71, #1e874b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+        }
+        .logo span {
+            color: #2ecc71;
+            font-size: 1.7rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-links a {
+            color: #c7f0d6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #2ecc71;
+            border-bottom: 2px solid #2ecc71;
+            padding-bottom: 4px;
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 3.8rem;
+            font-family: 'Bebas Neue', cursive;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+        .hero .accent {
+            color: #2ecc71;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin: 12px 0;
+            letter-spacing: 4px;
+        }
+        .hero p {
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 1.1rem;
+            color: #b9dfca;
+        }
+        .ip-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid #2ecc7160;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 20px 8px 28px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .ip-card code {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: none;
+            color: #7ef0a6;
+            letter-spacing: 1px;
+        }
+        .copy-btn {
+            background: #1e874b;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .copy-btn:hover {
+            background: #2ecc71;
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #2ecc71;
+        }
+        .online-badge {
+            background: #1c2c22;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .green-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 6px #2ecc71;
+        }
+
+        section {
+            padding: 70px 0;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+            margin-bottom: 48px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: #2ecc71;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .feature-card {
+            background: rgba(18, 30, 22, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 28px;
+            border: 1px solid #2a5a3e;
+            transition: 0.25s;
+        }
+        .feature-card:hover {
+            border-color: #2ecc71;
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 16px;
+            color: #5efc9a;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: #c8ecd9;
+        }
+
+        .rules-list {
+            background: rgba(0,0,0,0.5);
+            border-radius: 32px;
+            padding: 24px 32px;
+            backdrop-filter: blur(4px);
+        }
+        .rule-item {
+            display: flex;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(46,204,113,0.25);
+        }
+        .rule-num {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #2ecc71;
+            font-family: monospace;
+        }
+        .rule-text {
+            font-size: 1.05rem;
+        }
+        .wipe-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #1c352670;
+            border-radius: 56px;
+            padding: 20px 32px;
+            margin-top: 30px;
+            border: 1px solid #2ecc71;
+        }
+        .wipe-date {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #5efc9a;
+        }
+        .map-link {
+            margin-top: 35px;
+            background: #0f1913;
+            border-radius: 48px;
+            padding: 18px 24px;
+            text-align: center;
+            border: 1px solid #2ecc7140;
+        }
+        .map-link a {
+            color: #7ef0a6;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed #2ecc71;
+        }
+        .map-link a:hover {
+            color: #2ecc71;
+        }
+        .footer {
+            padding: 40px 0 30px;
+            text-align: center;
+            color: #91bba4;
+            font-size: 0.85rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .social-links a {
+            color: #a5e0bc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .discord-link {
+            background: #2a6043;
+            padding: 10px 24px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+        .discord-link:hover {
+            background: #3e8060;
+            transform: scale(1.02);
+        }
+        button, .copy-btn {
+            background: none;
+            border: none;
+        }
+
+        @media (max-width: 780px) {
+            .hero h2 { font-size: 2.4rem; }
+            .ip-card code { font-size: 1.1rem; }
+            .section-title { font-size: 1.8rem; }
+            .header-content { flex-direction: column; text-align: center; }
+            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .wipe-info { flex-direction: column; gap: 12px; text-align: center; }
+            .rule-item { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="rust-bg"></div>
+
+<header class="header">
+    <div class="container header-content">
+        <div class="logo">
+            <h1>MENTOL RUST</h1>
+            <span>// 2X</span>
+        </div>
+        <div class="nav-links">
+            <a href="#about">О сервере</a>
+            <a href="#rules">Правила</a>
+            <a href="#connect">Подключение</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="hero">
+            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ВАЙП КАЖДЫЙ ЧЕТВЕРГ ✓ БЕЗ КИТОВ</div>
+            <h2>ЧЕСТНОЕ ВЫЖИВАНИЕ БЕЗ ЛИМИТОВ</h2>
+            <p>Никаких донат-китов, клановых ивентов и лишних ограничений. Только хардкор, уважение игроков и свежий вайп каждую неделю.</p>
+            <div class="ip-card" id="connect">
+                <code>213.230.109.15:22015</code>
+                <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
+                <div class="online-badge"><span class="green-dot"></span> игроков: безлимит</div>
+            </div>
+            <p style="font-size:0.85rem; margin-top: 20px;">🧊 Карта Procedural Map | Глобальный вайп с удалением изучений — 4 июня 21:00 МСК</p>
+        </div>
+
+        <section id="about">
+            <h2 class="section-title">О ПРОЕКТЕ</h2>
+            <div class="grid-2col">
+                <div class="feature-card">
+                    <h3>🍃 РЕЙТЫ 2X</h3>
+                    <p>• Древесина, руда, металл, скрап — ВСЁ ×2 от стандарта<br>• Лутабоксы улучшены пропорционально<br>• Крафт оружия и брони — стандартный</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚙️ АНТИЧИТ & АДМИНЫ</h3>
+                    <p>• EAC + серверная защита от скриптов<br>• Мгновенная проверка репортов<br>• Честные ивенты: аэродром, вертолёт, атака учёных<br>• Логи всех действий — читерам не место</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📅 ГЛОБАЛЬНЫЙ ВАЙП</h3>
+                    <p>• Вайп каждый ЧЕТВЕРГ в 21:00 МСК<br>• <strong>4 июня 2026, 21:00 МСК</strong> — полный сброс карты и ВСЕХ ИЗУЧЕНИЙ<br>• Никаких стартовых китов — всё с нуля</p>
+                </div>
+                <div class="feature-card">
+                    <h3>♾️ БЕЗ ЛИМИТОВ</h3>
+                    <p>• Максимальное количество игроков — не ограничено<br>• Лимит группы — отсутствует<br>• Строгий запрет на читы, но свобода для кланов и соло</p>
+                </div>
+            </div>
+            <div class="map-link">
+                🔗 <strong>Текущая карта (до вайпа 4 июня):</strong><br>
+                <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer">https://rustmaps.com/map/3500_1575511587</a> — кликабельно, открывается в новой вкладке.
+            </div>
+            <div class="wipe-info">
+                <div>❄️ <strong>Ближайший глобальный вайп (с удалением BP):</strong></div>
+                <div class="wipe-date">Четверг, 4 июня 2026, 21:00 МСК</div>
+                <div>⏱️ <span id="countdown">обновление...</span></div>
+            </div>
+            <p style="margin-top: 24px; text-align: center; background: #1f3a2c70; border-radius: 32px; padding: 12px;">❗ Никаких китов, никаких ивентов с призами — только честный Rust и нагибаторская атмосфера.</p>
+        </section>
+
+        <section id="rules">
+            <h2 class="section-title">ПРАВИЛА СЕРВЕРА</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-num">01</div>
+                    <div class="rule-text"><strong>Запрещены читы, скрипты, макросы на отдачу</strong> — перманентный бан без возможности апелляции.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">02</div>
+                    <div class="rule-text"><strong>Оффлайн-рейды разрешены</strong>, но запрещены эксплойты (проход сквозь стены, стакинг стен). Только честная дверь/стена через взрывчатку.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">03</div>
+                    <div class="rule-text"><strong>Уважение к игрокам и администрации</strong>. Токсичность, оскорбления, расизм = мут от 2 часов до бана.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">04</div>
+                    <div class="rule-text"><strong>Запрещено блокировать лутабель и монументы</strong> (строить в радиусе 40 м от аэропорта, водонапорной башни, крупных точек интереса).</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">05</div>
+                    <div class="rule-text"><strong>Любая форма рекламы других проектов запрещена</strong>. Спам = мут/бан.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-num">06</div>
+                    <div class="rule-text"><strong>Нет лимита группы и нет ограничений на количество игроков</strong> — играйте как хотите, главное без читов и оскорблений.</div>
+                </div>
+            </div>
+            <p style="margin-top: 32px; text-align:center; background:#1b3829; padding:12px; border-radius:40px;">🌿 Полные правила в Discord — /rules. Нарушителей банят без предупреждений. 🌿</p>
+        </section>
+
+        <section id="connect" style="border-bottom: none;">
+            <h2 class="section-title">ПОДКЛЮЧАЙСЯ</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: center;">
+                <div style="flex:1; min-width: 220px;">
+                    <h3 style="font-size: 1.6rem;">Консольная команда:</h3>
+                    <code style="background:#121f18; display: inline-block; padding: 16px 24px; border-radius: 20px; margin: 20px 0; font-weight: bold; border-left: 4px solid #2ecc71;">client.connect 213.230.109.15:22015</code>
+                    <p>Нажмите F1 в игре → вставьте команду.<br>✅ Низкий пинг для РФ и СНГ ✅ Rust+ работает</p>
+                </div>
+                <div style="flex:1; min-width: 220px; background: #14261d; border-radius: 32px; padding: 28px; text-align: center;">
+                    <div style="font-size: 2rem;">🍃</div>
+                    <h3>Discord-сообщество</h3>
+                    <p>Новости, помощь, общение, репорты</p>
+                    <a href="https://discord.gg/9QS89qcPnf" target="_blank" rel="noopener noreferrer" class="discord-link">💬 Присоединиться к Discord</a>
+                    <p style="font-size:12px; margin-top: 12px;">(кликабельная ссылка — ведёт напрямую)</p>
+                </div>
+            </div>
+            <div style="margin-top: 40px; text-align: center; background: rgba(0,0,0,0.3); border-radius: 48px; padding: 18px;">
+                <span>⭐ Рейтинг 4.8 на основе 270 отзывов ⭐</span>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="social-links">
+            <a href="https://discord.gg/9QS89qcPnf" target="_blank">Discord</a>
+            <a href="#">YouTube (скоро)</a>
+            <a href="#">DonationAlerts (только на хостинг)</a>
+        </div>
+        <p>© 2026 «Mentol Rust» — независимый проект. Не аффилирован с Facepunch Studios.</p>
+        <p style="margin-top: 10px;">Честная игра, еженедельные вайпы, рейты 2x, отсутствие донат-китов и лимитов.</p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        const copyBtn = document.getElementById('copyIpBtn');
+        if(copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const ipText = "213.230.109.15:22015";
+                navigator.clipboard.writeText(ipText).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = "✅ Скопировано!";
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                }).catch(() => {
+                    alert("Не удалось скопировать IP: " + ipText);
+                });
+            });
+        }
+
+        function getNextThursdayWipe() {
+            const now = new Date();
+            const currentDay = now.getDay();
+            let daysUntilThursday = (4 - currentDay + 7) % 7;
+            if (daysUntilThursday === 0 && now.getHours() >= 21) {
+                daysUntilThursday = 7;
+            } else if (daysUntilThursday === 0) {
+                daysUntilThursday = 0;
+            }
+            const nextThursday = new Date(now);
+            nextThursday.setDate(now.getDate() + daysUntilThursday);
+            nextThursday.setHours(21, 0, 0, 0);
+            return nextThursday;
+        }
+
+        function updateCountdown() {
+            const countdownSpan = document.getElementById('countdown');
+            if (!countdownSpan) return;
+            const now = new Date();
+            const targetDate = getNextThursdayWipe();
+            const diff = targetDate - now;
+            if (diff <= 0) {
+                countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
+            } else {
+                const days = Math.floor(diff / (1000*60*60*24));
+                const hours = Math.floor((diff % (86400000)) / (3600000));
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+                countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
+            }
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElem = document.querySelector(targetId);
+                    if (targetElem) {
+                        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>
