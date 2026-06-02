@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждую пятницу в 15:00 МСК. Без китов, без лимита игроков. Глобальный вайп 5 июня в 15:00. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
-    <title>Mental Rust | 2x | Вайп каждую пятницу в 15:00 | Без китов и лимитов</title>
-    <!-- ↓↓↓ СТРОКА ДЛЯ ИКОНКИ (favicon) ↓↓↓ -->
+    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп карты каждую пятницу в 15:00 МСК, глобальный вайп с удалением чертежей — каждая первая пятница месяца. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
+    <title>Mental Rust | 2x | Вайп каждую пятницу 15:00 | Глобальный вайп в первую пятницу месяца</title>
+    <!-- Иконка favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- ↑↑↑ ЭТУ СТРОКУ НУЖНО ВСТАВИТЬ ВНУТРЬ ТЕГА <head> ↑↑↑ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        /* (весь ваш CSS остаётся без изменений) */
         * {
             margin: 0;
             padding: 0;
@@ -185,9 +183,7 @@
         .online-badge {
             background: #1c2c22;
             border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            padding: 4px 12px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -199,6 +195,14 @@
             border-radius: 50%;
             display: inline-block;
             box-shadow: 0 0 6px #2ecc71;
+            flex-shrink: 0;
+        }
+        .battlemetrics-iframe {
+            border: none;
+            background: transparent;
+            height: 36px;
+            width: 160px;
+            vertical-align: middle;
         }
         .clickable-map {
             display: inline-block;
@@ -357,6 +361,7 @@
             .wipe-info { flex-direction: column; text-align: center; }
             .rule-item { gap: 12px; }
             .rule-num { min-width: 45px; font-size: 1.4rem; }
+            .battlemetrics-iframe { width: 140px; }
         }
     </style>
 </head>
@@ -380,7 +385,7 @@
 <main>
     <div class="container">
         <div class="hero">
-            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ВАЙП КАЖДУЮ ПЯТНИЦУ В 15:00 ✓ БЕЗ КИТОВ</div>
+            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ВАЙП КАЖДУЮ ПЯТНИЦУ В 15:00 ✓ ГЛОБАЛЬНЫЙ ВАЙП (ЧЕРТЕЖИ) — ПЕРВАЯ ПЯТНИЦА МЕСЯЦА</div>
             <h2>ЧЕСТНОЕ ВЫЖИВАНИЕ БЕЗ ЛИМИТОВ</h2>
             <p>Никаких донат-китов, клановых ивентов и лишних ограничений. Только хардкор, уважение игроков и свежий вайп каждую неделю.</p>
             <div class="ip-card" id="connect">
@@ -388,7 +393,7 @@
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
                 <div class="online-badge">
                     <span class="green-dot"></span>
-                    <span>игроков: безлимит</span>
+                    <iframe src="https://www.battlemetrics.com/embed/server/39090846?hide=header,footer,info" class="battlemetrics-iframe" scrolling="no"></iframe>
                 </div>
             </div>
             <div>
@@ -411,7 +416,7 @@
                 </div>
                 <div class="feature-card">
                     <h3>📅 ВАЙПЫ</h3>
-                    <p>• Вайп каждый ПЯТНИЦУ в 15:00 МСК<br>• <strong>5 июня 2026, 15:00 МСК</strong> — глобальный вайп (с удалением чертежей)<br>• Никаких стартовых китов — всё с нуля</p>
+                    <p>• Вайп карты — каждую ПЯТНИЦУ в 15:00 МСК<br>• <strong>Глобальный вайп (с удалением чертежей) — каждая первая пятница месяца</strong><br>• Никаких стартовых китов — всё с нуля</p>
                 </div>
                 <div class="feature-card">
                     <h3>♾️ БЕЗ ЛИМИТОВ</h3>
@@ -419,9 +424,14 @@
                 </div>
             </div>
             <div class="wipe-info">
-                <div>❄️ <strong>Ближайший вайп (обычный или глобальный):</strong></div>
-                <div class="wipe-date" id="wipeDate">Пятница, 5 июня 2026, 15:00 МСК</div>
+                <div>❄️ <strong>Ближайший вайп карты:</strong></div>
+                <div class="wipe-date" id="wipeDate"></div>
                 <div>⏱️ <span id="countdown">обновление...</span></div>
+            </div>
+            <div class="wipe-info" style="margin-top: 20px; background: #2a4538;">
+                <div>🔥 <strong>Ближайший глобальный вайп (с удалением чертежей):</strong></div>
+                <div class="wipe-date" id="globalWipeDate"></div>
+                <div>📚 <span id="globalCountdown">обновление...</span></div>
             </div>
             <p style="margin-top: 24px; text-align: center; background: #1f3a2c70; border-radius: 32px; padding: 12px;">❗ Никаких китов, никаких ивентов с призами — только честный Rust и нагибаторская атмосфера.</p>
         </section>
@@ -476,7 +486,7 @@
             <a href="#">DonationAlerts (только на хостинг)</a>
         </div>
         <p>© 2026 «Mental Rust» — независимый проект. Не аффилирован с Facepunch Studios.</p>
-        <p style="margin-top: 10px;">Честная игра, еженедельные вайпы по пятницам в 15:00, рейты 2x, отсутствие донат-китов и лимитов.</p>
+        <p style="margin-top: 10px;">Честная игра, еженедельные вайпы карты по пятницам в 15:00, глобальный вайп чертежей — первая пятница месяца. Рейты 2x, без донат-китов и лимитов.</p>
     </div>
 </footer>
 
@@ -498,7 +508,20 @@
             });
         }
 
-        function getNextFridayWipe() {
+        // Вспомогательная функция для форматирования даты
+        function formatDateRussian(date) {
+            const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            const dayName = days[date.getDay()];
+            const dayNum = date.getDate();
+            const month = months[date.getMonth()];
+            const hours = date.getHours();
+            const minutes = String(date.getMinutes()).padStart(2,'0');
+            return `${dayName}, ${dayNum} ${month} ${date.getFullYear()}, ${hours}:${minutes} МСК`;
+        }
+
+        // Получение ближайшей пятницы 15:00
+        function getNextFriday() {
             const now = new Date();
             const currentDay = now.getDay(); // 5 = пятница
             let daysUntilFriday = (5 - currentDay + 7) % 7;
@@ -513,27 +536,41 @@
             return nextFriday;
         }
 
-        function formatDateRussian(date) {
-            const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
-            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-            const dayName = days[date.getDay()];
-            const dayNum = date.getDate();
-            const month = months[date.getMonth()];
-            const hours = date.getHours();
-            const minutes = String(date.getMinutes()).padStart(2,'0');
-            return `${dayName}, ${dayNum} ${month} ${date.getFullYear()}, ${hours}:${minutes} МСК`;
+        // Получение ближайшей первой пятницы месяца (глобальный вайп)
+        function getNextFirstFriday() {
+            const now = new Date();
+            let year = now.getFullYear();
+            let month = now.getMonth();
+            // Находим первую пятницу текущего месяца
+            let firstFriday = new Date(year, month, 1);
+            while (firstFriday.getDay() !== 5) { // 5 = пятница
+                firstFriday.setDate(firstFriday.getDate() + 1);
+            }
+            firstFriday.setHours(15, 0, 0, 0);
+            // Если первая пятница уже прошла (и сегодня не она, либо сегодня она но уже позже 15:00), берём следующего месяца
+            if (firstFriday < now) {
+                month++;
+                if (month > 11) { month = 0; year++; }
+                firstFriday = new Date(year, month, 1);
+                while (firstFriday.getDay() !== 5) {
+                    firstFriday.setDate(firstFriday.getDate() + 1);
+                }
+                firstFriday.setHours(15, 0, 0, 0);
+            }
+            return firstFriday;
         }
 
         function updateWipeUI() {
-            const wipeDate = getNextFridayWipe();
+            // Ближайшая пятница (обычный вайп)
+            const nextFriday = getNextFriday();
             const wipeDateElem = document.getElementById('wipeDate');
             if (wipeDateElem) {
-                wipeDateElem.textContent = formatDateRussian(wipeDate);
+                wipeDateElem.textContent = formatDateRussian(nextFriday);
             }
             const countdownSpan = document.getElementById('countdown');
             if (countdownSpan) {
                 const now = new Date();
-                const diff = wipeDate - now;
+                const diff = nextFriday - now;
                 if (diff <= 0) {
                     countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
                 } else {
@@ -544,10 +581,33 @@
                     countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
                 }
             }
+
+            // Глобальный вайп (первая пятница месяца)
+            const firstFriday = getNextFirstFriday();
+            const globalWipeElem = document.getElementById('globalWipeDate');
+            if (globalWipeElem) {
+                globalWipeElem.textContent = formatDateRussian(firstFriday);
+            }
+            const globalCountSpan = document.getElementById('globalCountdown');
+            if (globalCountSpan) {
+                const now = new Date();
+                const diff = firstFriday - now;
+                if (diff <= 0) {
+                    globalCountSpan.textContent = "Глобальный вайп идёт!";
+                } else {
+                    const days = Math.floor(diff / (1000*60*60*24));
+                    const hours = Math.floor((diff % (86400000)) / (3600000));
+                    const minutes = Math.floor((diff % 3600000) / 60000);
+                    const secs = Math.floor((diff % 60000) / 1000);
+                    globalCountSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
+                }
+            }
         }
+
         updateWipeUI();
         setInterval(updateWipeUI, 1000);
 
+        // Плавная навигация
         const navLinks = document.querySelectorAll('.nav-links a');
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
