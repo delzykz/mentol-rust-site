@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mentol Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждый четверг в 21:00 МСК. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
-    <title>Mentol Rust | 2x | Вайп каждый четверг | Без китов и лимитов</title>
+    <meta name="description" content="Mentol Rust — рейты 2x (дерево, руда, металл, скрап), вайп каждую пятницу в 21:00 МСК. Без китов, без лимита игроков. Глобальный вайп 5 июня. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
+    <title>Mentol Rust | 2x | Вайп каждую пятницу | Без китов и лимитов</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- если добавите favicon -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,12 +182,10 @@
         .online-badge {
             background: #1c2c22;
             border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            padding: 4px 12px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .green-dot {
             width: 10px;
@@ -196,6 +194,14 @@
             border-radius: 50%;
             display: inline-block;
             box-shadow: 0 0 6px #2ecc71;
+            flex-shrink: 0;
+        }
+        .battlemetrics-iframe {
+            border: none;
+            background: transparent;
+            height: 36px;
+            width: 160px;
+            vertical-align: middle;
         }
         .clickable-map {
             display: inline-block;
@@ -354,6 +360,7 @@
             .wipe-info { flex-direction: column; text-align: center; }
             .rule-item { gap: 12px; }
             .rule-num { min-width: 45px; font-size: 1.4rem; }
+            .battlemetrics-iframe { width: 140px; }
         }
     </style>
 </head>
@@ -377,13 +384,16 @@
 <main>
     <div class="container">
         <div class="hero">
-            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ВАЙП КАЖДЫЙ ЧЕТВЕРГ ✓ БЕЗ КИТОВ</div>
+            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ВАЙП КАЖДУЮ ПЯТНИЦУ ✓ БЕЗ КИТОВ</div>
             <h2>ЧЕСТНОЕ ВЫЖИВАНИЕ БЕЗ ЛИМИТОВ</h2>
             <p>Никаких донат-китов, клановых ивентов и лишних ограничений. Только хардкор, уважение игроков и свежий вайп каждую неделю.</p>
             <div class="ip-card" id="connect">
                 <code>213.230.109.15:22015</code>
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
-                <div class="online-badge"><span class="green-dot"></span> игроков: безлимит</div>
+                <div class="online-badge">
+                    <span class="green-dot"></span>
+                    <iframe src="https://www.battlemetrics.com/embed/server/39090846" class="battlemetrics-iframe" scrolling="no"></iframe>
+                </div>
             </div>
             <div>
                 <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer" class="clickable-map">
@@ -405,7 +415,7 @@
                 </div>
                 <div class="feature-card">
                     <h3>📅 ВАЙПЫ</h3>
-                    <p>• Вайп каждый ЧЕТВЕРГ в 21:00 МСК<br>• <strong>4 июня 2026, 21:00 МСК</strong> — полный сброс карты и ВСЕХ ИЗУЧЕНИЙ<br>• Никаких стартовых китов — всё с нуля</p>
+                    <p>• Вайп каждый ПЯТНИЦУ в 21:00 МСК<br>• <strong>5 июня 2026, 21:00 МСК</strong> — глобальный вайп (с удалением чертежей)<br>• Никаких стартовых китов — всё с нуля</p>
                 </div>
                 <div class="feature-card">
                     <h3>♾️ БЕЗ ЛИМИТОВ</h3>
@@ -413,8 +423,8 @@
                 </div>
             </div>
             <div class="wipe-info">
-                <div>❄️ <strong>Ближайший вайп:</strong></div>
-                <div class="wipe-date">Четверг, 4 июня 2026, 21:00 МСК</div>
+                <div>❄️ <strong>Ближайший вайп (обычный или глобальный):</strong></div>
+                <div class="wipe-date" id="wipeDate">Пятница, 5 июня 2026, 21:00 МСК</div>
                 <div>⏱️ <span id="countdown">обновление...</span></div>
             </div>
             <p style="margin-top: 24px; text-align: center; background: #1f3a2c70; border-radius: 32px; padding: 12px;">❗ Никаких китов, никаких ивентов с призами — только честный Rust и нагибаторская атмосфера.</p>
@@ -492,39 +502,56 @@
             });
         }
 
-        function getNextThursdayWipe() {
+        // Функция получения следующей пятницы 21:00 МСК
+        function getNextFridayWipe() {
             const now = new Date();
-            const currentDay = now.getDay();
-            let daysUntilThursday = (4 - currentDay + 7) % 7;
-            if (daysUntilThursday === 0 && now.getHours() >= 21) {
-                daysUntilThursday = 7;
-            } else if (daysUntilThursday === 0) {
-                daysUntilThursday = 0;
+            const currentDay = now.getDay(); // 5 = пятница
+            let daysUntilFriday = (5 - currentDay + 7) % 7;
+            if (daysUntilFriday === 0 && now.getHours() >= 21) {
+                daysUntilFriday = 7;
+            } else if (daysUntilFriday === 0) {
+                daysUntilFriday = 0;
             }
-            const nextThursday = new Date(now);
-            nextThursday.setDate(now.getDate() + daysUntilThursday);
-            nextThursday.setHours(21, 0, 0, 0);
-            return nextThursday;
+            const nextFriday = new Date(now);
+            nextFriday.setDate(now.getDate() + daysUntilFriday);
+            nextFriday.setHours(21, 0, 0, 0);
+            return nextFriday;
         }
 
-        function updateCountdown() {
+        function formatDateRussian(date) {
+            const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            const dayName = days[date.getDay()];
+            const dayNum = date.getDate();
+            const month = months[date.getMonth()];
+            const hours = date.getHours();
+            const minutes = String(date.getMinutes()).padStart(2,'0');
+            return `${dayName}, ${dayNum} ${month} ${date.getFullYear()}, ${hours}:${minutes} МСК`;
+        }
+
+        function updateWipeUI() {
+            const wipeDate = getNextFridayWipe();
+            const wipeDateElem = document.getElementById('wipeDate');
+            if (wipeDateElem) {
+                wipeDateElem.textContent = formatDateRussian(wipeDate);
+            }
             const countdownSpan = document.getElementById('countdown');
-            if (!countdownSpan) return;
-            const now = new Date();
-            const targetDate = getNextThursdayWipe();
-            const diff = targetDate - now;
-            if (diff <= 0) {
-                countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
-            } else {
-                const days = Math.floor(diff / (1000*60*60*24));
-                const hours = Math.floor((diff % (86400000)) / (3600000));
-                const minutes = Math.floor((diff % 3600000) / 60000);
-                const secs = Math.floor((diff % 60000) / 1000);
-                countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
+            if (countdownSpan) {
+                const now = new Date();
+                const diff = wipeDate - now;
+                if (diff <= 0) {
+                    countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
+                } else {
+                    const days = Math.floor(diff / (1000*60*60*24));
+                    const hours = Math.floor((diff % (86400000)) / (3600000));
+                    const minutes = Math.floor((diff % 3600000) / 60000);
+                    const secs = Math.floor((diff % 60000) / 1000);
+                    countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
+                }
             }
         }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        updateWipeUI();
+        setInterval(updateWipeUI, 1000);
 
         const navLinks = document.querySelectorAll('.nav-links a');
         navLinks.forEach(link => {
