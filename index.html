@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп карты каждую пятницу в 15:00 МСК, глобальный вайп с удалением чертежей — каждая первая пятница месяца. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: https://dalink.to/mental_rust">
+    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп карты каждую пятницу в 15:00 МСК, глобальный вайп с удалением чертежей — каждая первая пятница месяца. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: https://discord.gg/GtEnCGj76Y">
     <title>Mental Rust | 2x | Вайп каждую пятницу 15:00 | Глобальный вайп в первую пятницу месяца</title>
-    <!-- Иконка favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
+        /* (стили без изменений, оставляем как в предыдущем рабочем варианте) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             background-color: #0a0f0c;
             font-family: 'Inter', sans-serif;
@@ -24,24 +23,10 @@
             line-height: 1.5;
             scroll-behavior: smooth;
         }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #162317;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2ecc71;
-            border-radius: 4px;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #162317; }
+        ::-webkit-scrollbar-thumb { background: #2ecc71; border-radius: 4px; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         .rust-bg {
             position: fixed;
             top: 0;
@@ -62,7 +47,6 @@
             background-repeat: repeat;
             pointer-events: none;
         }
-
         .header {
             padding: 24px 0;
             border-bottom: 1px solid rgba(46, 204, 113, 0.4);
@@ -115,7 +99,6 @@
             border-bottom: 2px solid #2ecc71;
             padding-bottom: 4px;
         }
-
         .hero {
             padding: 80px 0 60px;
             text-align: center;
@@ -216,7 +199,6 @@
             border-color: #2ecc71;
             color: #2ecc71;
         }
-
         section {
             padding: 70px 0;
             border-bottom: 1px solid rgba(46, 204, 113, 0.2);
@@ -268,7 +250,6 @@
             color: #c8ecd9;
             flex: 1;
         }
-
         .rules-list {
             background: rgba(0,0,0,0.5);
             border-radius: 32px;
@@ -345,7 +326,6 @@
             background: none;
             border: none;
         }
-
         @media (max-width: 780px) {
             .hero h2 { font-size: 2.4rem; }
             .ip-card code { font-size: 1.1rem; }
@@ -464,7 +444,7 @@
                     <div style="font-size: 2rem;">🍃</div>
                     <h3 style="margin: 10px 0;">Discord-сообщество</h3>
                     <p>Новости, помощь, общение, репорты</p>
-                    <a href="https://dalink.to/mental_rust" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
+                    <a href="https://discord.gg/GtEnCGj76Y" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
                 </div>
             </div>
         </section>
@@ -474,9 +454,9 @@
 <footer class="footer">
     <div class="container">
         <div class="social-links">
-            <a href="https://dalink.to/mental_rust" target="_blank">Discord</a>
+            <a href="https://discord.gg/GtEnCGj76Y" target="_blank">Discord</a>
             <a href="#">YouTube (скоро)</a>
-            <a href="#">DonationAlerts (только на хостинг)</a>
+            <a href="https://dalink.to/mental_rust" target="_blank">DonationAlerts</a>
         </div>
         <p>© 2026 «Mental Rust» — независимый проект. Не аффилирован с Facepunch Studios.</p>
         <p style="margin-top: 10px;">Честная игра, еженедельные вайпы карты по пятницам в 15:00, глобальный вайп чертежей — первая пятница месяца. Рейты 2x, без донат-китов и лимитов.</p>
@@ -501,7 +481,6 @@
             });
         }
 
-        // Вспомогательная функция для форматирования даты
         function formatDateRussian(date) {
             const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
             const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -513,60 +492,45 @@
             return `${dayName}, ${dayNum} ${month} ${date.getFullYear()}, ${hours}:${minutes} МСК`;
         }
 
-        // Получение ближайшей пятницы 15:00
         function getNextFriday() {
             const now = new Date();
-            const currentDay = now.getDay(); // 5 = пятница
+            const currentDay = now.getDay();
             let daysUntilFriday = (5 - currentDay + 7) % 7;
-            if (daysUntilFriday === 0 && now.getHours() >= 15) {
-                daysUntilFriday = 7;
-            } else if (daysUntilFriday === 0) {
-                daysUntilFriday = 0;
-            }
+            if (daysUntilFriday === 0 && now.getHours() >= 15) daysUntilFriday = 7;
+            else if (daysUntilFriday === 0) daysUntilFriday = 0;
             const nextFriday = new Date(now);
             nextFriday.setDate(now.getDate() + daysUntilFriday);
             nextFriday.setHours(15, 0, 0, 0);
             return nextFriday;
         }
 
-        // Получение ближайшей первой пятницы месяца (глобальный вайп)
         function getNextFirstFriday() {
             const now = new Date();
             let year = now.getFullYear();
             let month = now.getMonth();
-            // Находим первую пятницу текущего месяца
             let firstFriday = new Date(year, month, 1);
-            while (firstFriday.getDay() !== 5) { // 5 = пятница
-                firstFriday.setDate(firstFriday.getDate() + 1);
-            }
+            while (firstFriday.getDay() !== 5) firstFriday.setDate(firstFriday.getDate() + 1);
             firstFriday.setHours(15, 0, 0, 0);
-            // Если первая пятница уже прошла (и сегодня не она, либо сегодня она но уже позже 15:00), берём следующего месяца
             if (firstFriday < now) {
                 month++;
                 if (month > 11) { month = 0; year++; }
                 firstFriday = new Date(year, month, 1);
-                while (firstFriday.getDay() !== 5) {
-                    firstFriday.setDate(firstFriday.getDate() + 1);
-                }
+                while (firstFriday.getDay() !== 5) firstFriday.setDate(firstFriday.getDate() + 1);
                 firstFriday.setHours(15, 0, 0, 0);
             }
             return firstFriday;
         }
 
         function updateWipeUI() {
-            // Ближайшая пятница (обычный вайп)
             const nextFriday = getNextFriday();
             const wipeDateElem = document.getElementById('wipeDate');
-            if (wipeDateElem) {
-                wipeDateElem.textContent = formatDateRussian(nextFriday);
-            }
+            if (wipeDateElem) wipeDateElem.textContent = formatDateRussian(nextFriday);
             const countdownSpan = document.getElementById('countdown');
             if (countdownSpan) {
                 const now = new Date();
                 const diff = nextFriday - now;
-                if (diff <= 0) {
-                    countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
-                } else {
+                if (diff <= 0) countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
+                else {
                     const days = Math.floor(diff / (1000*60*60*24));
                     const hours = Math.floor((diff % (86400000)) / (3600000));
                     const minutes = Math.floor((diff % 3600000) / 60000);
@@ -574,20 +538,15 @@
                     countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
                 }
             }
-
-            // Глобальный вайп (первая пятница месяца)
             const firstFriday = getNextFirstFriday();
             const globalWipeElem = document.getElementById('globalWipeDate');
-            if (globalWipeElem) {
-                globalWipeElem.textContent = formatDateRussian(firstFriday);
-            }
+            if (globalWipeElem) globalWipeElem.textContent = formatDateRussian(firstFriday);
             const globalCountSpan = document.getElementById('globalCountdown');
             if (globalCountSpan) {
                 const now = new Date();
                 const diff = firstFriday - now;
-                if (diff <= 0) {
-                    globalCountSpan.textContent = "Глобальный вайп идёт!";
-                } else {
+                if (diff <= 0) globalCountSpan.textContent = "Глобальный вайп идёт!";
+                else {
                     const days = Math.floor(diff / (1000*60*60*24));
                     const hours = Math.floor((diff % (86400000)) / (3600000));
                     const minutes = Math.floor((diff % 3600000) / 60000);
@@ -596,11 +555,9 @@
                 }
             }
         }
-
         updateWipeUI();
         setInterval(updateWipeUI, 1000);
 
-        // Плавная навигация
         const navLinks = document.querySelectorAll('.nav-links a');
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -608,9 +565,7 @@
                 if (targetId && targetId.startsWith('#')) {
                     e.preventDefault();
                     const targetElem = document.querySelector(targetId);
-                    if (targetElem) {
-                        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
