@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп карты каждую пятницу в 15:00 МСК, глобальный вайп с удалением чертежей — каждая первая пятница месяца. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: discord.gg/9QS89qcPnf">
+    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), вайп карты каждую пятницу в 15:00 МСК, глобальный вайп с удалением чертежей — каждая первая пятница месяца. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: https://dalink.to/mental_rust">
     <title>Mental Rust | 2x | Вайп каждую пятницу 15:00 | Глобальный вайп в первую пятницу месяца</title>
     <!-- Иконка favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -183,7 +183,9 @@
         .online-badge {
             background: #1c2c22;
             border-radius: 40px;
-            padding: 4px 12px;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -195,14 +197,6 @@
             border-radius: 50%;
             display: inline-block;
             box-shadow: 0 0 6px #2ecc71;
-            flex-shrink: 0;
-        }
-        .battlemetrics-iframe {
-            border: none;
-            background: transparent;
-            height: 36px;
-            width: 160px;
-            vertical-align: middle;
         }
         .clickable-map {
             display: inline-block;
@@ -361,7 +355,6 @@
             .wipe-info { flex-direction: column; text-align: center; }
             .rule-item { gap: 12px; }
             .rule-num { min-width: 45px; font-size: 1.4rem; }
-            .battlemetrics-iframe { width: 140px; }
         }
     </style>
 </head>
@@ -393,7 +386,7 @@
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
                 <div class="online-badge">
                     <span class="green-dot"></span>
-                    <iframe src="https://www.battlemetrics.com/embed/server/39090846?hide=header,footer,info" class="battlemetrics-iframe" scrolling="no"></iframe>
+                    <span>🟢 Сервер работает</span>
                 </div>
             </div>
             <div>
@@ -471,7 +464,7 @@
                     <div style="font-size: 2rem;">🍃</div>
                     <h3 style="margin: 10px 0;">Discord-сообщество</h3>
                     <p>Новости, помощь, общение, репорты</p>
-                    <a href="https://discord.gg/ZYYxeFhAtH" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
+                    <a href="https://dalink.to/mental_rust" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
                 </div>
             </div>
         </section>
@@ -481,7 +474,7 @@
 <footer class="footer">
     <div class="container">
         <div class="social-links">
-            <a href="https://discord.gg/ZYYxeFhAtH" target="_blank">Discord</a>
+            <a href="https://dalink.to/mental_rust" target="_blank">Discord</a>
             <a href="#">YouTube (скоро)</a>
             <a href="#">DonationAlerts (только на хостинг)</a>
         </div>
