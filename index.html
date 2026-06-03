@@ -128,7 +128,7 @@
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 20px;
+            gap: 30px; /* увеличено, чтобы тултип не налезал */
             margin-bottom: 40px;
         }
         .shop-item {
@@ -166,14 +166,14 @@
             padding: 2px 6px;
             border-radius: 30px;
         }
-        /* Тултип сверху */
+        /* Тултип снизу от иконки, с дополнительным отступом */
         .shop-item::after {
             content: attr(data-name);
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            margin-bottom: 8px;
+            margin-top: 8px;
             background: #000c;
             color: white;
             font-size: 0.75rem;
@@ -187,7 +187,7 @@
         }
         .shop-item:hover::after {
             opacity: 1;
-            transform: translateX(-50%) translateY(-2px);
+            transform: translateX(-50%) translateY(2px);
         }
         .balance-panel {
             background: #1c2c22;
@@ -245,8 +245,14 @@
             color: #fff;
         }
         @media (max-width: 800px) {
-            .shop-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
-            .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-bottom: 4px; }
+            .shop-grid {
+                gap: 20px; /* на мобилках можно чуть меньше */
+            }
+            .shop-item::after {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+                margin-top: 4px;
+            }
         }
     </style>
 </head>
