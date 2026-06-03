@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Mental Rust — рейты 2x (дерево, руда, металл, скрап), глобальный вайп (карта + чертежи) каждую пятницу в 15:00 МСК. Без китов, без лимита игроков. IP: 213.230.109.15:22015. Discord: https://discord.gg/GtEnCGj76Y">
-    <title>Mental Rust | 2x | Глобальный вайп каждую пятницу в 15:00</title>
+    <meta name="description" content="Mental Rust — донат магазин с быстрой покупкой. Рейты 2x, глобальный вайп каждую пятницу. IP: 213.230.109.15:22015. Discord: discord.gg/GtEnCGj76Y">
+    <title>Mental Rust | Донат магазин</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             background-color: #0a0f0c;
             font-family: 'Inter', sans-serif;
@@ -23,13 +22,10 @@
             line-height: 1.5;
             scroll-behavior: smooth;
         }
-
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #162317; }
         ::-webkit-scrollbar-thumb { background: #2ecc71; border-radius: 4px; }
-
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
         .rust-bg {
             position: fixed;
             top: 0;
@@ -39,20 +35,8 @@
             z-index: -2;
             background: radial-gradient(circle at 20% 30%, #1a2a1f, #050a07);
         }
-        .rust-bg::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" opacity="0.06"><path fill="none" d="M0 0 L400 0 L400 300 L0 300 Z" stroke="%232ecc71" stroke-width="0.5"/><path d="M50 20 L80 50 L50 80 L20 50 Z" fill="%232ecc71" opacity="0.2"/><circle cx="300" cy="200" r="12" fill="none" stroke="%232ecc71" stroke-width="1.5"/><path d="M200 150 L220 170 L200 190 L180 170 Z" fill="%231f8a4c" opacity="0.3"/></svg>');
-            background-repeat: repeat;
-            pointer-events: none;
-        }
-
         .header {
-            padding: 24px 0;
+            padding: 20px 0;
             border-bottom: 1px solid rgba(46, 204, 113, 0.4);
             background: rgba(8, 15, 11, 0.75);
             backdrop-filter: blur(12px);
@@ -67,282 +51,183 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            font-family: 'Bebas Neue', cursive;
-            letter-spacing: 2px;
-        }
         .logo h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-family: 'Bebas Neue', cursive;
             background: linear-gradient(135deg, #2ecc71, #1e874b);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            text-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
         }
-        .logo span {
-            color: #2ecc71;
-            font-size: 1.7rem;
-        }
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-        .nav-links a {
-            color: #c7f0d6;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: 1rem;
-        }
-        .nav-links a:hover {
-            color: #2ecc71;
-            border-bottom: 2px solid #2ecc71;
-            padding-bottom: 4px;
-        }
-
+        .nav-links { display: flex; gap: 28px; flex-wrap: wrap; }
+        .nav-links a { color: #c7f0d6; text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .nav-links a:hover { color: #2ecc71; }
         .hero {
-            padding: 80px 0 60px;
+            padding: 40px 0 30px;
             text-align: center;
         }
-        .hero h2 {
-            font-size: 3.8rem;
-            font-family: 'Bebas Neue', cursive;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-        .hero .accent {
-            color: #2ecc71;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            margin: 12px 0;
-            letter-spacing: 4px;
-        }
-        .hero p {
-            max-width: 700px;
-            margin: 20px auto;
-            font-size: 1.1rem;
-            color: #b9dfca;
-        }
+        .hero h2 { font-size: 2.5rem; font-family: 'Bebas Neue', cursive; }
         .ip-card {
             background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
             border: 1px solid #2ecc7160;
             border-radius: 60px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 16px;
-            padding: 8px 20px 8px 28px;
-            margin-top: 28px;
+            gap: 12px;
+            padding: 6px 20px;
             flex-wrap: wrap;
+            margin-top: 15px;
         }
-        .ip-card code {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: none;
-            color: #7ef0a6;
-            letter-spacing: 1px;
-        }
-        .copy-btn {
-            background: #1e874b;
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .copy-btn:hover {
-            background: #2ecc71;
-            transform: scale(1.02);
-            box-shadow: 0 0 10px #2ecc71;
-        }
-        .online-badge {
-            background: #1c2c22;
-            border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .green-dot {
-            width: 10px;
-            height: 10px;
-            background: #2ecc71;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 6px #2ecc71;
-        }
-        .clickable-map {
-            display: inline-block;
-            margin-top: 24px;
-            background: rgba(46, 204, 113, 0.15);
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: 0.2s;
-            text-decoration: none;
-            color: #a5e0bc;
-            border: 1px solid #2ecc7140;
-        }
-        .clickable-map:hover {
-            background: #2ecc7120;
-            border-color: #2ecc71;
-            color: #2ecc71;
-        }
-
-        section {
-            padding: 70px 0;
-            border-bottom: 1px solid rgba(46, 204, 113, 0.2);
-        }
+        .ip-card code { font-size: 1.2rem; font-weight: 700; color: #7ef0a6; }
+        .copy-btn { background: #1e874b; padding: 5px 15px; border-radius: 40px; cursor: pointer; font-weight: 600; border: none; color: white; }
+        .online-badge { background: #1c2c22; border-radius: 40px; padding: 5px 15px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+        .green-dot { width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 6px #2ecc71; }
         .section-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-family: 'Bebas Neue', cursive;
-            letter-spacing: 2px;
-            margin-bottom: 48px;
-            position: relative;
+            margin: 30px 0 20px;
             display: inline-block;
-        }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: #2ecc71;
-        }
-        .grid-2col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-        }
-        .feature-card {
-            background: rgba(18, 30, 22, 0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 24px;
-            padding: 28px;
-            border: 1px solid #2a5a3e;
-            transition: 0.25s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .feature-card:hover {
-            border-color: #2ecc71;
-            transform: translateY(-5px);
-        }
-        .feature-card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 16px;
-            color: #5efc9a;
-            font-weight: 600;
-        }
-        .feature-card p {
-            color: #c8ecd9;
-            flex: 1;
-        }
-
-        .rules-list {
-            background: rgba(0,0,0,0.5);
-            border-radius: 32px;
-            padding: 24px 32px;
-            backdrop-filter: blur(4px);
-        }
-        .rule-item {
-            display: flex;
-            gap: 18px;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(46,204,113,0.25);
-        }
-        .rule-num {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #2ecc71;
-            font-family: monospace;
-            min-width: 55px;
-        }
-        .rule-text {
-            font-size: 1.05rem;
+            border-bottom: 3px solid #2ecc71;
+            padding-bottom: 5px;
         }
         .wipe-info {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
             background: #1c352670;
-            border-radius: 56px;
-            padding: 20px 32px;
-            margin-top: 30px;
+            border-radius: 60px;
+            padding: 12px 24px;
+            margin: 20px 0;
             border: 1px solid #2ecc71;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .wipe-date {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #5efc9a;
+        /* Фильтры */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0 30px;
+            justify-content: center;
+        }
+        .filter-btn {
+            background: #162317;
+            border: 1px solid #2a5a3e;
+            padding: 6px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #dbefe2;
+            font-size: 0.9rem;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #2ecc71;
+            color: #0a0f0c;
+            border-color: #2ecc71;
+        }
+        /* Сетка магазина: 5 колонок на десктопе */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        /* Элемент товара */
+        .shop-item {
+            background: rgba(18, 30, 22, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #2a5a3e;
+            transition: 0.2s;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .shop-item:hover {
+            transform: translateY(-5px);
+            border-color: #2ecc71;
+            background: rgba(18, 30, 22, 0.9);
+        }
+        /* Иконка (картинка или эмодзи) */
+        .item-icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+        /* Цена слева сверху */
+        .item-price {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            background: #ff5722;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 30px;
+            z-index: 2;
+        }
+        /* Количество (если >1) справа снизу */
+        .item-amount {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: #f0b90b;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 30px;
+        }
+        .item-name {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ddd;
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Тулитип при наведении (показывает полное название) */
+        .shop-item[data-name]::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000c;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .shop-item:hover::after {
+            opacity: 1;
         }
         .footer {
-            padding: 40px 0 30px;
+            padding: 30px 0;
             text-align: center;
+            font-size: 0.8rem;
             color: #91bba4;
-            font-size: 0.85rem;
+            border-top: 1px solid #2a5a3e;
+            margin-top: 20px;
         }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        .social-links a {
-            color: #a5e0bc;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .discord-link {
-            background: #2a6043;
-            padding: 10px 24px;
-            border-radius: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-            text-decoration: none;
-            color: white;
-        }
-        .discord-link:hover {
-            background: #3e8060;
-            transform: scale(1.02);
-        }
-        button, .copy-btn {
-            background: none;
-            border: none;
-        }
-
-        @media (max-width: 780px) {
-            .hero h2 { font-size: 2.4rem; }
-            .ip-card code { font-size: 1.1rem; }
-            .section-title { font-size: 1.8rem; }
-            .header-content { flex-direction: column; text-align: center; }
-            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
-            .wipe-info { flex-direction: column; text-align: center; }
-            .rule-item { gap: 12px; }
-            .rule-num { min-width: 45px; font-size: 1.4rem; }
+        @media (max-width: 800px) {
+            .shop-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+            .item-icon { font-size: 2.2rem; }
+            .item-price { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -351,14 +236,11 @@
 
 <header class="header">
     <div class="container header-content">
-        <div class="logo">
-            <h1>MENTAL RUST</h1>
-            <span>// 2X</span>
-        </div>
+        <div class="logo"><h1>MENTAL RUST</h1></div>
         <div class="nav-links">
-            <a href="#about">О сервере</a>
+            <a href="#shop">Магазин</a>
+            <a href="#info">О сервере</a>
             <a href="#rules">Правила</a>
-            <a href="#connect">Подключение</a>
         </div>
     </div>
 </header>
@@ -366,188 +248,267 @@
 <main>
     <div class="container">
         <div class="hero">
-            <div class="accent">✓ РЕЙТЫ 2X (ВСЁ) ✓ ГЛОБАЛЬНЫЙ ВАЙП (КАРТА + ЧЕРТЕЖИ) КАЖДУЮ ПЯТНИЦУ В 15:00 ✓ БЕЗ КИТОВ</div>
-            <h2>ЧЕСТНОЕ ВЫЖИВАНИЕ БЕЗ ЛИМИТОВ</h2>
-            <p>Никаких донат-китов, клановых ивентов и лишних ограничений. Только хардкор, уважение игроков и полный сброс (карта + чертежи) каждую пятницу.</p>
-            <div class="ip-card" id="connect">
+            <h2>ДОНАТ МАГАЗИН</h2>
+            <div class="ip-card">
                 <code>213.230.109.15:22015</code>
                 <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
-                <div class="online-badge">
-                    <span class="green-dot"></span>
-                    <span>🟢 Сервер работает</span>
-                </div>
-            </div>
-            <div>
-                <a href="https://rustmaps.com/map/3500_1575511587" target="_blank" rel="noopener noreferrer" class="clickable-map">
-                    🗺️ Карта Procedural Map (кликабельно)
-                </a>
+                <div class="online-badge"><span class="green-dot"></span>🟢 Сервер работает</div>
             </div>
         </div>
 
-        <section id="about">
-            <h2 class="section-title">О ПРОЕКТЕ</h2>
-            <div class="grid-2col">
-                <div class="feature-card">
-                    <h3>🍃 РЕЙТЫ 2X</h3>
-                    <p>• Древесина, руда, металл, скрап — ВСЁ ×2 от стандарта<br>• Лутабоксы улучшены пропорционально<br>• Крафт оружия и брони — стандартный</p>
-                </div>
-                <div class="feature-card">
-                    <h3>⚙️ АНТИЧИТ & АДМИНЫ</h3>
-                    <p>• EAC + серверная защита от скриптов<br>• Мгновенная проверка репортов<br>• Честные ивенты: аэродром, вертолёт, атака учёных<br>• Логи всех действий — читерам не место</p>
-                </div>
-                <div class="feature-card">
-                    <h3>📅 ВАЙПЫ</h3>
-                    <p>• <strong>Глобальный вайп (карта + ВСЕ чертежи) — каждую ПЯТНИЦУ в 15:00 МСК</strong><br>• Никаких стартовых китов — всё с нуля<br>• Равные условия для всех каждую неделю</p>
-                </div>
-                <div class="feature-card">
-                    <h3>♾️ БЕЗ ЛИМИТОВ</h3>
-                    <p>• Максимальное количество игроков — не ограничено<br>• Лимит группы — отсутствует<br>• Строгий запрет на читы, но свобода для кланов и соло</p>
-                </div>
-            </div>
-            <div class="wipe-info">
-                <div>❄️ <strong>Ближайший глобальный вайп (карта + чертежи):</strong></div>
-                <div class="wipe-date" id="wipeDate"></div>
-                <div>⏱️ <span id="countdown">обновление...</span></div>
-            </div>
-            <p style="margin-top: 24px; text-align: center; background: #1f3a2c70; border-radius: 32px; padding: 12px;">❗ Никаких китов, никаких ивентов с призами — только честный Rust. Каждую пятницу в 15:00 МСК полный вайп (карта + изучения).</p>
-        </section>
+        <!-- Блок информации о вайпе -->
+        <div class="wipe-info" id="info">
+            <span>❄️ Глобальный вайп (карта+чертежи): <strong id="wipeDate"></strong></span>
+            <span>⏱️ До вайпа: <span id="countdown"></span></span>
+        </div>
 
-        <section id="rules">
-            <h2 class="section-title">ПРАВИЛА СЕРВЕРА</h2>
-            <div class="rules-list">
-                <div class="rule-item">
-                    <div class="rule-num">01</div>
-                    <div class="rule-text"><strong>Запрещены читы, скрипты, макросы на отдачу</strong> — перманентный бан без возможности апелляции.</div>
-                </div>
-                <div class="rule-item">
-                    <div class="rule-num">02</div>
-                    <div class="rule-text"><strong>Уважение к игрокам и администрации</strong>. Токсичность, оскорбления, расизм = мут от 2 часов до бана.</div>
-                </div>
-                <div class="rule-item">
-                    <div class="rule-num">03</div>
-                    <div class="rule-text"><strong>Любая форма рекламы других проектов запрещена</strong>. Спам = мут/бан.</div>
-                </div>
-                <div class="rule-item">
-                    <div class="rule-num">04</div>
-                    <div class="rule-text"><strong>Нет лимита группы и нет ограничений на количество игроков</strong> — играйте как хотите, главное без читов и оскорблений.</div>
-                </div>
-            </div>
-            <p style="margin-top: 32px; text-align:center; background:#1b3829; padding:12px; border-radius:40px;">🌿 Полные правила в Discord — /rules. Нарушителей банят без предупреждений. 🌿</p>
-        </section>
+        <!-- Фильтры -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-cat="all">Все</button>
+            <button class="filter-btn" data-cat="weapon">Оружие</button>
+            <button class="filter-btn" data-cat="ammo">Боеприпасы</button>
+            <button class="filter-btn" data-cat="armor">Одежда</button>
+            <button class="filter-btn" data-cat="building">Строения</button>
+            <button class="filter-btn" data-cat="items">Предметы</button>
+            <button class="filter-btn" data-cat="food">Еда</button>
+            <button class="filter-btn" data-cat="medical">Медикаменты</button>
+            <button class="filter-btn" data-cat="resource">Ресурсы</button>
+            <button class="filter-btn" data-cat="tools">Инструменты</button>
+            <button class="filter-btn" data-cat="traps">Ловушки</button>
+            <button class="filter-btn" data-cat="components">Компоненты</button>
+            <button class="filter-btn" data-cat="electricity">Электричество</button>
+        </div>
 
-        <section id="connect" style="border-bottom: none;">
-            <h2 class="section-title">ПОДКЛЮЧАЙСЯ</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: stretch;">
-                <div style="flex:1; min-width: 220px; background: #121f18; border-radius: 32px; padding: 28px; text-align: center;">
-                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Консольная команда</h3>
-                    <code style="background:#1c2c22; display: inline-block; padding: 14px 20px; border-radius: 20px; font-weight: bold; border-left: 4px solid #2ecc71; word-break: break-all;">client.connect 213.230.109.15:22015</code>
-                    <p style="margin-top: 20px;">Нажмите F1 в игре → вставьте команду.<br>✅ Низкий пинг для РФ и СНГ ✅ Rust+ работает</p>
-                </div>
-                <div style="flex:1; min-width: 220px; background: #14261d; border-radius: 32px; padding: 28px; text-align: center;">
-                    <div style="font-size: 2rem;">🍃</div>
-                    <h3 style="margin: 10px 0;">Discord-сообщество</h3>
-                    <p>Новости, помощь, общение, репорты</p>
-                    <a href="https://discord.gg/GtEnCGj76Y" target="_blank" rel="noopener noreferrer" class="discord-link" style="margin-top: 16px;">💬 Присоединиться к Discord</a>
-                </div>
-            </div>
-        </section>
+        <!-- Сетка товаров -->
+        <div id="shopGrid" class="shop-grid"></div>
+        <p style="text-align:center; margin-top:-10px; margin-bottom:30px;">💰 После оплаты напишите в Discord с указанием SteamID и названия товара. Выдача ручная.</p>
     </div>
 </main>
 
 <footer class="footer">
     <div class="container">
-        <div class="social-links">
-            <a href="https://discord.gg/GtEnCGj76Y" target="_blank">Discord</a>
-            <a href="#">YouTube (скоро)</a>
-            <a href="https://dalink.to/mental_rust" target="_blank">DonationAlerts</a>
-        </div>
-        <p>© 2026 «Mental Rust» — независимый проект. Не аффилирован с Facepunch Studios.</p>
-        <p style="margin-top: 10px;">Честная игра, глобальный вайп (карта + чертежи) каждую пятницу в 15:00 МСК, рейты 2x, без донат-китов и лимитов.</p>
+        <p>© 2026 Mental Rust — рейты 2x, глобальный вайп каждую пятницу 15:00 МСК</p>
+        <p style="margin-top:8px;">💬 Discord: <a href="https://discord.gg/GtEnCGj76Y" target="_blank" style="color:#2ecc71;">discord.gg/GtEnCGj76Y</a> | Донат через <a href="https://dalink.to/mental_rust" target="_blank" style="color:#ff5722;">DonationAlerts</a></p>
     </div>
 </footer>
 
 <script>
-    (function() {
-        const copyBtn = document.getElementById('copyIpBtn');
-        if(copyBtn) {
-            copyBtn.addEventListener('click', () => {
-                const ipText = "213.230.109.15:22015";
-                navigator.clipboard.writeText(ipText).then(() => {
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = "✅ Скопировано!";
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                    }, 2000);
-                }).catch(() => {
-                    alert("Не удалось скопировать IP: " + ipText);
-                });
-            });
-        }
+    // --------------------------------------------------------------
+    // БАЗА ДАННЫХ ПРЕДМЕТОВ (название, категория, цена, количество, иконка(эмодзи))
+    // Вы можете легко заменить эмодзи на <img src="...">, изменив поле iconUrl
+    // --------------------------------------------------------------
+    const items = [
+        // Ресурсы
+        { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, icon: "🎒" },
+        { name: "Древесина", cat: "resource", price: 5, amount: 1000, icon: "🌲" },
+        { name: "Камень", cat: "resource", price: 5, amount: 1000, icon: "🪨" },
+        { name: "Фрагменты металла", cat: "resource", price: 15, amount: 1000, icon: "⚙️" },
+        { name: "Металл высшего качества", cat: "resource", price: 50, amount: 100, icon: "⭐" },
+        { name: "Топливо низкого качества", cat: "resource", price: 25, amount: 250, icon: "⛽" },
+        { name: "Ткань", cat: "resource", price: 15, amount: 250, icon: "🧵" },
+        { name: "Кожа", cat: "resource", price: 10, amount: 250, icon: "🦌" },
+        { name: "Уголь", cat: "resource", price: 5, amount: 1000, icon: "⚫" },
+        { name: "Порох", cat: "resource", price: 50, amount: 1000, icon: "💥" },
+        { name: "Плавленная сера", cat: "resource", price: 25, amount: 1000, icon: "🟡" },
+        { name: "Дизельное топливо", cat: "resource", price: 10, amount: 1, icon: "🛢️" },
+        // Верстаки
+        { name: "Верстак III", cat: "building", price: 150, amount: 1, icon: "🔧" },
+        { name: "Верстак II", cat: "building", price: 100, amount: 1, icon: "🔨" },
+        { name: "Верстак I", cat: "building", price: 10, amount: 1, icon: "🛠️" },
+        // Карты
+        { name: "Красная карта", cat: "items", price: 35, amount: 1, icon: "🔴" },
+        { name: "Синяя карта", cat: "items", price: 25, amount: 1, icon: "🔵" },
+        { name: "Зеленая карта", cat: "items", price: 10, amount: 1, icon: "🟢" },
+        // Компоненты
+        { name: "Труба", cat: "components", price: 3, amount: 1, icon: "📀" },
+        { name: "Микросхема", cat: "components", price: 10, amount: 1, icon: "💻" },
+        { name: "Шестерня", cat: "components", price: 5, amount: 1, icon: "⚙️" },
+        { name: "Корпус винтовки", cat: "components", price: 15, amount: 1, icon: "🔫" },
+        { name: "Корпус ПП", cat: "components", price: 10, amount: 1, icon: "🔫" },
+        { name: "Корпус полуавтомата", cat: "components", price: 5, amount: 1, icon: "🔫" },
+        { name: "Компьютер наведения", cat: "components", price: 10, amount: 1, icon: "📡" },
+        { name: "Камера видеонаблюдения", cat: "components", price: 10, amount: 1, icon: "📷" },
+        { name: "Металлическая пружина", cat: "components", price: 5, amount: 1, icon: "🌀" },
+        { name: "Листовой металл", cat: "components", price: 5, amount: 1, icon: "📄" },
+        { name: "Набор для шитья", cat: "components", price: 10, amount: 5, icon: "🧵" },
+        { name: "Веревка", cat: "components", price: 10, amount: 5, icon: "🪢" },
+        { name: "Дорожный знак", cat: "components", price: 3, amount: 1, icon: "🚸" },
+        // Чаи
+        { name: "Чистый рудный чай", cat: "food", price: 15, amount: 1, icon: "🍵" },
+        { name: "Чистый древесный чай", cat: "food", price: 15, amount: 1, icon: "🍵" },
+        { name: "Чай на макс здоровье", cat: "medical", price: 15, amount: 1, icon: "🍵" },
+        { name: "Чай на металлолом", cat: "food", price: 20, amount: 1, icon: "🍵" },
+        // Гранаты и взрывчатка
+        { name: "Сигнальная граната", cat: "ammo", price: 40, amount: 1, icon: "🧨" },
+        { name: "Гранаты F1", cat: "ammo", price: 15, amount: 5, icon: "💣" },
+        { name: "C4", cat: "ammo", price: 200, amount: 5, icon: "💥" },
+        { name: "Сумка с зарядом", cat: "ammo", price: 75, amount: 5, icon: "🧨" },
+        // Оружие
+        { name: "Ракетница", cat: "weapon", price: 40, amount: 1, icon: "🚀" },
+        { name: "Гранатомёт", cat: "weapon", price: 40, amount: 1, icon: "🧨" },
+        { name: "L96", cat: "weapon", price: 100, amount: 1, icon: "🔫" },
+        { name: "Самодельная винтовка (болт)", cat: "weapon", price: 75, amount: 1, icon: "🔫" },
+        { name: "M249", cat: "weapon", price: 100, amount: 1, icon: "🔫" },
+        { name: "Миниган", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "AK-47", cat: "weapon", price: 75, amount: 1, icon: "🔫" },
+        { name: "LR300", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "M39", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "СКС", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "MP5", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "Томпсон", cat: "weapon", price: 40, amount: 1, icon: "🔫" },
+        { name: "Берданка", cat: "weapon", price: 35, amount: 1, icon: "🔫" },
+        { name: "Самодельный СМГ", cat: "weapon", price: 35, amount: 1, icon: "🔫" },
+        { name: "M4 дробовик", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "Спас-дробовик", cat: "weapon", price: 50, amount: 1, icon: "🔫" },
+        { name: "Помповый дробовик", cat: "weapon", price: 30, amount: 1, icon: "🔫" },
+        { name: "Двушка (Eoka)", cat: "weapon", price: 15, amount: 1, icon: "🔫" },
+        { name: "Крупнокалиберный револьвер", cat: "weapon", price: 25, amount: 1, icon: "🔫" },
+        { name: "Револьвер", cat: "weapon", price: 15, amount: 1, icon: "🔫" },
+        { name: "Питон", cat: "weapon", price: 25, amount: 1, icon: "🔫" },
+        { name: "Огнемёт", cat: "weapon", price: 30, amount: 1, icon: "🔥" },
+        // Обвесы
+        { name: "Прицел 16x", cat: "weapon", price: 40, amount: 1, icon: "🔭" },
+        { name: "Прицел 8x", cat: "weapon", price: 25, amount: 1, icon: "🔭" },
+        { name: "Военный глушитель", cat: "weapon", price: 20, amount: 1, icon: "🔇" },
+        { name: "Увеличенный магазин", cat: "weapon", price: 10, amount: 1, icon: "📦" },
+        { name: "Колиматорный прицел", cat: "weapon", price: 10, amount: 1, icon: "🎯" },
+        { name: "Лазерный прицел", cat: "weapon", price: 10, amount: 1, icon: "🔴" },
+        { name: "Дульный тормоз", cat: "weapon", price: 10, amount: 1, icon: "🔧" },
+        { name: "Оружейный фонарик", cat: "weapon", price: 5, amount: 1, icon: "🔦" },
+        // Патроны
+        { name: "Патроны 5.56", cat: "ammo", price: 30, amount: 256, icon: "🔫" },
+        { name: "Скоростные 5.56", cat: "ammo", price: 35, amount: 256, icon: "🔫" },
+        { name: "Зажигательные 5.56", cat: "ammo", price: 35, amount: 256, icon: "🔥" },
+        { name: "Разрывные 5.56", cat: "ammo", price: 75, amount: 256, icon: "💥" },
+        { name: "Пистолетные патроны", cat: "ammo", price: 25, amount: 256, icon: "🔫" },
+        { name: "Скоростные пистолетные", cat: "ammo", price: 30, amount: 256, icon: "🔫" },
+        { name: "Зажигательные пистолетные", cat: "ammo", price: 35, amount: 256, icon: "🔥" },
+        { name: "Дробь 12мм", cat: "ammo", price: 20, amount: 32, icon: "🔫" },
+        { name: "Пули 12мм", cat: "ammo", price: 20, amount: 32, icon: "🔫" },
+        { name: "Зажигательные 12мм", cat: "ammo", price: 35, amount: 32, icon: "🔥" },
+        { name: "Стрелы", cat: "ammo", price: 15, amount: 64, icon: "🏹" },
+        { name: "Скоростные стрелы", cat: "ammo", price: 15, amount: 64, icon: "🏹" },
+        { name: "Огненные стрелы", cat: "ammo", price: 30, amount: 64, icon: "🔥" },
+        // Электричество
+        { name: "Тестовый генератор", cat: "electricity", price: 150, amount: 1, icon: "⚡" },
+        { name: "Ветрогенератор", cat: "electricity", price: 50, amount: 1, icon: "💨" },
+        { name: "Солнечная панель", cat: "electricity", price: 20, amount: 1, icon: "☀️" },
+        { name: "Большой аккумулятор", cat: "electricity", price: 25, amount: 1, icon: "🔋" },
+        { name: "Малый генератор", cat: "electricity", price: 25, amount: 1, icon: "⚙️" },
+        { name: "Компьютерная станция", cat: "electricity", price: 30, amount: 1, icon: "💻" },
+        // Турели
+        { name: "Зенитная турель", cat: "traps", price: 50, amount: 1, icon: "🛡️" },
+        { name: "Автоматическая турель", cat: "traps", price: 40, amount: 1, icon: "🔫" },
+        { name: "Ловушка с дробовиком", cat: "traps", price: 25, amount: 1, icon: "🔫" },
+        // Инструменты
+        { name: "Бензопила", cat: "tools", price: 30, amount: 1, icon: "⛓️" },
+        { name: "Бур", cat: "tools", price: 30, amount: 1, icon: "⛏️" },
+        { name: "Ледоруб", cat: "tools", price: 15, amount: 1, icon: "🧊" },
+        { name: "Самодельный топор", cat: "tools", price: 15, amount: 1, icon: "🪓" },
+        // Медицина
+        { name: "Антирад", cat: "medical", price: 30, amount: 1, icon: "💊" },
+        { name: "Шприцы", cat: "medical", price: 10, amount: 4, icon: "💉" },
+        // Броня
+        { name: "Очки ночного видения", cat: "armor", price: 30, amount: 1, icon: "🥽" },
+        { name: "Железная маска", cat: "armor", price: 30, amount: 1, icon: "🪖" },
+        { name: "Железный нагрудник", cat: "armor", price: 30, amount: 1, icon: "🛡️" },
+        { name: "Тактические перчатки", cat: "armor", price: 15, amount: 1, icon: "🧤" },
+        { name: "Шлем из кофейной банки", cat: "armor", price: 15, amount: 1, icon: "🥫" },
+        { name: "Броня из дорожных знаков", cat: "armor", price: 15, amount: 1, icon: "🚸" },
+        { name: "Килт из дорожных знаков", cat: "armor", price: 15, amount: 1, icon: "🚸" },
+        { name: "Перчатки из дорожных знаков", cat: "armor", price: 10, amount: 1, icon: "🚸" },
+        { name: "Тяжёлый пуленепробиваемый шлем", cat: "armor", price: 20, amount: 1, icon: "⛑️" },
+        { name: "Тяжёлый пуленепробиваемый нагрудник", cat: "armor", price: 20, amount: 1, icon: "🛡️" },
+        { name: "Тяжёлые пуленепробиваемые штаны", cat: "armor", price: 20, amount: 1, icon: "👖" },
+        // Строительство
+        { name: "Деревянная лестница", cat: "building", price: 10, amount: 1, icon: "🪜" },
+        { name: "Бронированная дверь", cat: "building", price: 30, amount: 1, icon: "🚪" },
+        { name: "Бронированная двойная дверь", cat: "building", price: 30, amount: 1, icon: "🚪" },
+        { name: "Лестничный люк", cat: "building", price: 25, amount: 1, icon: "🕳️" },
+        { name: "Треугольный люк", cat: "building", price: 25, amount: 1, icon: "🕳️" },
+        { name: "Гаражная дверь", cat: "building", price: 15, amount: 1, icon: "🚪" },
+        { name: "Металлические баррикады", cat: "building", price: 25, amount: 5, icon: "🧱" },
+        { name: "Печь", cat: "building", price: 10, amount: 1, icon: "🔥" },
+        { name: "Малый НПЗ", cat: "building", price: 35, amount: 1, icon: "🏭" },
+        { name: "Большая печь", cat: "building", price: 30, amount: 1, icon: "🔥" },
+        { name: "Шкаф для переодевания", cat: "building", price: 10, amount: 1, icon: "🗄️" },
+        { name: "Кровать", cat: "building", price: 10, amount: 1, icon: "🛏️" },
+        { name: "Гроб", cat: "building", price: 10, amount: 1, icon: "⚰️" }
+    ];
 
-        function formatDateRussian(date) {
-            const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
-            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-            const dayName = days[date.getDay()];
-            const dayNum = date.getDate();
-            const month = months[date.getMonth()];
-            const hours = date.getHours();
-            const minutes = String(date.getMinutes()).padStart(2,'0');
-            return `${dayName}, ${dayNum} ${month} ${date.getFullYear()}, ${hours}:${minutes} МСК`;
-        }
+    // Категории для фильтра (совпадают с data-cat)
+    let currentCategory = "all";
 
-        function getNextFridayWipe() {
-            const now = new Date();
-            const currentDay = now.getDay(); // 5 = пятница
-            let daysUntilFriday = (5 - currentDay + 7) % 7;
-            if (daysUntilFriday === 0 && now.getHours() >= 15) {
-                daysUntilFriday = 7;
-            } else if (daysUntilFriday === 0) {
-                daysUntilFriday = 0;
-            }
-            const nextFriday = new Date(now);
-            nextFriday.setDate(now.getDate() + daysUntilFriday);
-            nextFriday.setHours(15, 0, 0, 0);
-            return nextFriday;
-        }
+    function renderShop() {
+        const grid = document.getElementById("shopGrid");
+        if (!grid) return;
+        const filtered = items.filter(item => currentCategory === "all" || item.cat === currentCategory);
+        grid.innerHTML = filtered.map(item => `
+            <div class="shop-item" data-name="${item.name}" title="${item.name}">
+                <div class="item-price">${item.price} ₽</div>
+                ${item.amount > 1 ? `<div class="item-amount">x${item.amount}</div>` : ''}
+                <div class="item-icon">${item.icon}</div>
+                <div class="item-name">${item.name}</div>
+            </div>
+        `).join("");
 
-        function updateWipeUI() {
-            const wipeDate = getNextFridayWipe();
-            const wipeDateElem = document.getElementById('wipeDate');
-            if (wipeDateElem) {
-                wipeDateElem.textContent = formatDateRussian(wipeDate);
-            }
-            const countdownSpan = document.getElementById('countdown');
-            if (countdownSpan) {
-                const now = new Date();
-                const diff = wipeDate - now;
-                if (diff <= 0) {
-                    countdownSpan.textContent = "Вайп идёт! Заходи быстрее!";
-                } else {
-                    const days = Math.floor(diff / (1000*60*60*24));
-                    const hours = Math.floor((diff % (86400000)) / (3600000));
-                    const minutes = Math.floor((diff % 3600000) / 60000);
-                    const secs = Math.floor((diff % 60000) / 1000);
-                    countdownSpan.textContent = `${days}д ${hours}ч ${minutes}м ${secs}с`;
-                }
-            }
-        }
-        updateWipeUI();
-        setInterval(updateWipeUI, 1000);
-
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId.startsWith('#')) {
-                    e.preventDefault();
-                    const targetElem = document.querySelector(targetId);
-                    if (targetElem) {
-                        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
+        // Добавляем обработчики клика по каждому товару
+        document.querySelectorAll('.shop-item').forEach((el, idx) => {
+            const originalItem = filtered[idx];
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Ссылка на DonationAlerts с суммой и комментарием
+                const daUrl = `https://www.donationalerts.com/r/mental_rust?amount=${originalItem.price}&comment=Куплю: ${encodeURIComponent(originalItem.name)} x${originalItem.amount}`;
+                window.open(daUrl, '_blank');
             });
         });
-    })();
+    }
+
+    // Фильтры
+    function initFilters() {
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-cat');
+                renderShop();
+            });
+        });
+    }
+
+    // Таймер вайпа
+    function getNextFriday() {
+        const now = new Date();
+        let days = (5 - now.getDay() + 7) % 7;
+        if (days === 0 && now.getHours() >= 15) days = 7;
+        const next = new Date(now);
+        next.setDate(now.getDate() + days);
+        next.setHours(15, 0, 0, 0);
+        return next;
+    }
+    function updateWipe() {
+        const wipe = getNextFriday();
+        const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+        const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+        document.getElementById('wipeDate').innerText = `${days[wipe.getDay()]}, ${wipe.getDate()} ${months[wipe.getMonth()]} ${wipe.getFullYear()} ${wipe.getHours()}:${String(wipe.getMinutes()).padStart(2,'0')} МСК`;
+        const diff = wipe - new Date();
+        if (diff <= 0) document.getElementById('countdown').innerText = "Вайп идёт!";
+        else {
+            const d = Math.floor(diff / 864e5), h = Math.floor((diff % 864e5) / 36e5), m = Math.floor((diff % 36e5) / 6e4), s = Math.floor((diff % 6e4) / 1e3);
+            document.getElementById('countdown').innerText = `${d}д ${h}ч ${m}м ${s}с`;
+        }
+    }
+    // Копирование IP
+    document.getElementById('copyIpBtn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText("213.230.109.15:22015");
+        alert("IP скопирован!");
+    });
+
+    initFilters();
+    renderShop();
+    updateWipe();
+    setInterval(updateWipe, 1000);
 </script>
 </body>
 </html>
