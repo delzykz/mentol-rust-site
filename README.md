@@ -1,2 +1,2 @@
-# mentol-rust-site
-mentol-rust-site
+# mental-rust-site
+mental-rust-site
