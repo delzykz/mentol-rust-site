@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mental Rust | Донат магазин</title>
+    <title>Mental Rust | Информация о сервере</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0f0c; font-family: 'Inter', sans-serif; color: #dbefe2; line-height: 1.5; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         .header {
             padding: 20px 0;
             border-bottom: 1px solid rgba(46, 204, 113, 0.4);
@@ -42,10 +42,12 @@
             cursor: pointer;
             font-family: inherit;
             transition: 0.2s;
+            text-decoration: none;
         }
         .nav-links button:hover, .nav-links a:hover { color: #2ecc71; }
-        .hero { text-align: center; padding: 40px 0 30px; }
-        .hero h2 { font-size: 2.5rem; font-family: 'Bebas Neue', cursive; }
+        .hero { text-align: center; padding: 60px 0 40px; }
+        .hero h2 { font-size: 2.8rem; font-family: 'Bebas Neue', cursive; }
+        .hero p { max-width: 700px; margin: 20px auto; font-size: 1.1rem; color: #b9dfca; }
         .ip-card {
             background: rgba(0,0,0,0.6);
             border: 1px solid #2ecc7160;
@@ -84,128 +86,31 @@
             background: #1c352670;
             border-radius: 60px;
             padding: 12px 24px;
-            margin: 20px 0;
+            margin: 30px 0;
             border: 1px solid #2ecc71;
-            flex-wrap: wrap;
-        }
-        .steamid-panel {
-            background: #1c2c22;
-            border-radius: 60px;
-            padding: 10px 24px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             flex-wrap: wrap;
             gap: 15px;
         }
-        .steam-input {
-            background: #0a0f0c;
-            border: 1px solid #2ecc71;
-            padding: 8px 16px;
-            border-radius: 40px;
-            color: white;
-            width: 220px;
-        }
-        .search-bar {
-            margin: 20px 0 10px;
-            display: flex;
-            justify-content: center;
-        }
-        .search-input {
-            background: #162317;
-            border: 1px solid #2a5a3e;
-            padding: 10px 20px;
-            border-radius: 40px;
-            width: 280px;
-            color: #dbefe2;
-            font-size: 0.9rem;
-        }
-        .search-input:focus {
-            outline: none;
-            border-color: #2ecc71;
-        }
-        .filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0 30px;
-            justify-content: center;
-        }
-        .filter-btn {
-            background: #162317;
-            border: 1px solid #2a5a3e;
-            padding: 6px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-            color: #dbefe2;
-            transition: 0.2s;
-        }
-        .filter-btn.active, .filter-btn:hover { background: #2ecc71; color: #0a0f0c; }
-        .shop-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
+            margin: 40px 0;
         }
-        .shop-item {
+        .feature-card {
             background: rgba(18,30,22,0.7);
             backdrop-filter: blur(4px);
-            border-radius: 20px;
-            padding: 12px 8px;
-            text-align: center;
+            border-radius: 24px;
+            padding: 24px;
             border: 1px solid #2a5a3e;
-            transition: 0.2s;
-            position: relative;
-            cursor: pointer;
         }
-        .shop-item:hover { transform: translateY(-5px); border-color: #2ecc71; }
-        .item-icon { width: 64px; height: 64px; margin: 0 auto 8px; object-fit: contain; }
-        .item-price {
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            background: #ff5722;
-            color: white;
-            font-weight: bold;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 30px;
-            z-index: 2;
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #5efc9a;
         }
-        .item-amount {
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            background: rgba(0,0,0,0.6);
-            color: #f0b90b;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 30px;
-        }
-        .shop-item::after {
-            content: attr(data-name);
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 8px;
-            background: #000c;
-            color: white;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            transition: 0.2s;
-            z-index: 10;
-        }
-        .shop-item:hover::after {
-            opacity: 1;
-            transform: translateX(-50%) translateY(2px);
-        }
-        .footer { text-align: center; padding: 30px 0; color: #91bba4; border-top: 1px solid #2a5a3e; margin-top: 20px; }
+        .feature-card p { color: #c8ecd9; }
+        .footer { text-align: center; padding: 30px 0; color: #91bba4; border-top: 1px solid #2a5a3e; margin-top: 40px; }
         .modal {
             display: none;
             position: fixed;
@@ -241,68 +146,9 @@
             cursor: pointer;
             color: #fff;
         }
-        .copy-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        .copy-modal-content {
-            background: #ff3333;
-            color: white;
-            text-align: center;
-            padding: 25px 30px;
-            border-radius: 30px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 0 20px rgba(255,0,0,0.5);
-            position: relative;
-        }
-        .copy-modal-content p {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            word-break: break-word;
-        }
-        .copy-modal-content button {
-            background: white;
-            color: #ff3333;
-            border: none;
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 8px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.2s;
-            margin: 0 5px;
-        }
-        .copy-modal-content button:hover {
-            transform: scale(1.05);
-        }
-        .copy-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-            background: none;
-            border: none;
-        }
-        .copy-modal-close:hover {
-            color: #ddd;
-        }
         @media (max-width: 800px) {
-            .shop-grid { gap: 20px; }
-            .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
-            .steam-input { width: 160px; }
-            .copy-modal-content p { font-size: 0.85rem; }
+            .hero h2 { font-size: 2rem; }
+            .ip-card code { font-size: 1rem; }
         }
     </style>
 </head>
@@ -312,7 +158,7 @@
         <div class="header-content">
             <div class="logo"><h1>MENTAL RUST</h1></div>
             <div class="nav-links">
-                <button id="navShop">Товары</button>
+                <button id="navShop">Магазин</button>
                 <button id="navAbout">О сервере</button>
                 <button id="navRules">Правила</button>
                 <a href="https://discord.gg/GtEnCGj76Y" target="_blank">Discord</a>
@@ -321,7 +167,8 @@
     </header>
 
     <div class="hero">
-        <h2>ДОНАТ МАГАЗИН</h2>
+        <h2>ХАРДКОРНОЕ ВЫЖИВАНИЕ</h2>
+        <p>Рейты 2x, глобальный вайп каждую пятницу в 15:00 МСК. Никаких китов и лимитов.</p>
         <div class="ip-card">
             <code>213.230.109.15:22015</code>
             <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
@@ -329,44 +176,32 @@
         </div>
     </div>
 
-    <div class="steamid-panel">
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <span>🔑 SteamID:</span>
-            <input type="text" id="steamIdInput" class="steam-input" placeholder="17 цифр">
-            <button id="saveSteamBtn" class="copy-btn">Сохранить</button>
-        </div>
-        <div>💡 ID сохраняется в браузере</div>
-    </div>
-
     <div class="wipe-info">
         <span>❄️ Глобальный вайп (карта+чертежи): <strong id="wipeDate"></strong></span>
         <span>⏱️ До вайпа: <span id="countdown"></span></span>
     </div>
 
-    <div class="search-bar">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск предмета...">
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>⚡ Рейты 2x</h3>
+            <p>Древесина, руда, металл, скрап — всё в два раза быстрее. Лутабоксы улучшены.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🛡️ Античит</h3>
+            <p>EAC + серверная защита от скриптов и макросов. Честная игра без читеров.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📅 Глобальный вайп</h3>
+            <p>Каждую пятницу в 15:00 МСК полный сброс карты и чертежей. Равные условия каждую неделю.</p>
+        </div>
+        <div class="feature-card">
+            <h3>♾️ Без лимитов</h3>
+            <p>Нет ограничений на онлайн и группу. Играйте с любым количеством друзей.</p>
+        </div>
     </div>
-
-    <div class="filter-bar" id="filterBar">
-        <button class="filter-btn active" data-cat="all">Все</button>
-        <button class="filter-btn" data-cat="weapon">Оружие</button>
-        <button class="filter-btn" data-cat="ammo">Боеприпасы</button>
-        <button class="filter-btn" data-cat="armor">Одежда</button>
-        <button class="filter-btn" data-cat="tools">Инструменты</button>
-        <button class="filter-btn" data-cat="resource">Ресурсы</button>
-        <button class="filter-btn" data-cat="building">Строения</button>
-        <button class="filter-btn" data-cat="electricity">Электричество</button>
-        <button class="filter-btn" data-cat="traps">Ловушки</button>
-        <button class="filter-btn" data-cat="components">Компоненты</button>
-        <button class="filter-btn" data-cat="items">Предметы</button>
-        <button class="filter-btn" data-cat="food">Еда</button>
-        <button class="filter-btn" data-cat="medical">Медикаменты</button>
-    </div>
-
-    <div id="shopGrid" class="shop-grid"></div>
 </div>
 
-<!-- Модальные окна (О сервере, Правила) -->
+<!-- Модальное окно "О сервере" -->
 <div id="modalAbout" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -377,9 +212,11 @@
         <p><strong>🛡️ Античит:</strong> EAC + серверная защита от скриптов и макросов.</p>
         <p><strong>🌍 Карта:</strong> Procedural Map, обновляется каждую неделю.</p>
         <p><strong>🔗 IP:</strong> <code>213.230.109.15:22015</code></p>
+        <p><strong>💬 Discord:</strong> <a href="https://discord.gg/GtEnCGj76Y" target="_blank" style="color:#2ecc71;">discord.gg/GtEnCGj76Y</a></p>
     </div>
 </div>
 
+<!-- Модальное окно "Правила" -->
 <div id="modalRules" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -412,290 +249,49 @@
     </div>
 </div>
 
-<!-- Красное модальное окно для копирования -->
-<div id="copyModal" class="copy-modal">
-    <div class="copy-modal-content">
-        <button class="copy-modal-close" id="copyModalClose">✕</button>
-        <p id="copyCommentText">✅ Комментарий скопирован в буфер!</p>
-        <p><strong>Вставьте скопированный комментарий в поле "Сообщение" на DonationAlerts.</strong></p>
-        <p><strong>Ожидайте выдачу предмета, предмет появится в /claim</strong></p>
-        <div>
-            <button id="copyModalOkBtn">ОК → DonationAlerts</button>
-        </div>
-    </div>
-</div>
-
 <footer class="footer">
     <p>© 2026 Mental Rust — рейты 2x, глобальный вайп каждую пятницу 15:00 МСК</p>
     <p>💬 Discord: <a href="https://discord.gg/GtEnCGj76Y" target="_blank" style="color:#2ecc71;">discord.gg/GtEnCGj76Y</a></p>
 </footer>
 
 <script>
-    // ======================== STEAMID ========================
-    let currentSteamId = localStorage.getItem('steamId');
-    const steamInput = document.getElementById('steamIdInput');
-    const saveBtn = document.getElementById('saveSteamBtn');
-
-    if (currentSteamId) steamInput.value = currentSteamId;
-
-    saveBtn.addEventListener('click', () => {
-        let id = steamInput.value.trim();
-        if (id && /^\d{17}$/.test(id)) {
-            localStorage.setItem('steamId', id);
-            currentSteamId = id;
-            const originalText = saveBtn.textContent;
-            saveBtn.textContent = '✅ Сохранено';
-            setTimeout(() => {
-                saveBtn.textContent = originalText;
-            }, 2000);
-            steamInput.style.border = '1px solid #2ecc71';
-        } else {
-            alert('Введите корректный SteamID (17 цифр)');
-            steamInput.style.border = '1px solid #ff5722';
-            setTimeout(() => {
-                steamInput.style.border = '1px solid #2ecc71';
-            }, 2000);
-        }
-    });
-
-    // ======================== ТОВАРЫ (полный список 150+) ========================
-    const items = [
-        { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, img: "largebackpack.png" },
-        { name: "Древесина", cat: "resource", price: 5, amount: 1000, img: "wood.png" },
-        { name: "Камень", cat: "resource", price: 5, amount: 1000, img: "stones.png" },
-        { name: "Фрагменты металла", cat: "resource", price: 15, amount: 1000, img: "metal.fragments.png" },
-        { name: "Металл высшего качества", cat: "resource", price: 50, amount: 100, img: "metal.refined.png" },
-        { name: "Топливо низкого качества", cat: "resource", price: 25, amount: 250, img: "lowgradefuel.png" },
-        { name: "Ткань", cat: "resource", price: 15, amount: 250, img: "cloth.png" },
-        { name: "Кожа", cat: "resource", price: 10, amount: 250, img: "leather.png" },
-        { name: "Уголь", cat: "resource", price: 5, amount: 1000, img: "charcoal.png" },
-        { name: "Порох", cat: "resource", price: 50, amount: 1000, img: "gunpowder.png" },
-        { name: "Плавленная сера", cat: "resource", price: 25, amount: 1000, img: "sulfur.png" },
-        { name: "Дизельное топливо", cat: "resource", price: 10, amount: 1, img: "diesel_barrel.png" },
-        { name: "Верстак III", cat: "building", price: 150, amount: 1, img: "workbench3.png" },
-        { name: "Верстак II", cat: "building", price: 100, amount: 1, img: "workbench2.png" },
-        { name: "Верстак I", cat: "building", price: 10, amount: 1, img: "workbench1.png" },
-        { name: "Красная карта", cat: "items", price: 35, amount: 1, img: "keycard_red.png" },
-        { name: "Синяя карта", cat: "items", price: 25, amount: 1, img: "keycard_blue.png" },
-        { name: "Зеленая карта", cat: "items", price: 10, amount: 1, img: "keycard_green.png" },
-        { name: "Труба", cat: "components", price: 3, amount: 1, img: "metalpipe.png" },
-        { name: "Микросхема", cat: "components", price: 10, amount: 1, img: "techparts.png" },
-        { name: "Шестерня", cat: "components", price: 5, amount: 1, img: "gears.png" },
-        { name: "Корпус винтовки", cat: "components", price: 15, amount: 1, img: "riflebody.png" },
-        { name: "Корпус ПП", cat: "components", price: 10, amount: 1, img: "smgbody.png" },
-        { name: "Корпус полуавтомата", cat: "components", price: 5, amount: 1, img: "semibody.png" },
-        { name: "Компьютер наведения", cat: "components", price: 10, amount: 1, img: "targeting.computer.png" },
-        { name: "Камера видеонаблюдения", cat: "components", price: 10, amount: 1, img: "cctv.camera.png" },
-        { name: "Металлическая пружина", cat: "components", price: 5, amount: 1, img: "techparts.png" },
-        { name: "Листовой металл", cat: "components", price: 5, amount: 1, img: "sheetmetal.png" },
-        { name: "Набор для шитья", cat: "components", price: 10, amount: 5, img: "sewingkit.png" },
-        { name: "Веревка", cat: "components", price: 10, amount: 5, img: "rope.png" },
-        { name: "Дорожный знак", cat: "components", price: 3, amount: 1, img: "roadsigns.png" },
-        { name: "Чистый рудный чай", cat: "food", price: 15, amount: 1, img: "oretea.pure.png" },
-        { name: "Чистый древесный чай", cat: "food", price: 15, amount: 1, img: "woodtea.pure.png" },
-        { name: "Чай на макс здоровье", cat: "food", price: 15, amount: 1, img: "maxhealthtea.pure.png" },
-        { name: "Чай на металлолом", cat: "food", price: 20, amount: 1, img: "scraptea.pure.png" },
-        { name: "Сигнальная граната", cat: "ammo", price: 40, amount: 1, img: "supply.signal.png" },
-        { name: "Гранаты F1", cat: "ammo", price: 15, amount: 5, img: "f1_grenade_icon.png" },
-        { name: "C4", cat: "ammo", price: 200, amount: 5, img: "explosive.timed.png" },
-        { name: "Сумка с зарядом", cat: "ammo", price: 75, amount: 5, img: "explosive.satchel.png" },
-        { name: "Ракетница", cat: "weapon", price: 40, amount: 1, img: "rocket.launcher.png" },
-        { name: "Гранатомёт", cat: "weapon", price: 40, amount: 1, img: "multiplegrenadelauncher.png" },
-        { name: "L96", cat: "weapon", price: 100, amount: 1, img: "rifle.l96.png" },
-        { name: "Самодельная винтовка (болт)", cat: "weapon", price: 75, amount: 1, img: "rifle.bolt.png" },
-        { name: "M249", cat: "weapon", price: 100, amount: 1, img: "lmg.m249.png" },
-        { name: "Миниган", cat: "weapon", price: 50, amount: 1, img: "minigun.png" },
-        { name: "AK-47", cat: "weapon", price: 75, amount: 1, img: "rifle.ak.png" },
-        { name: "LR300", cat: "weapon", price: 50, amount: 1, img: "rifle.lr300.png" },
-        { name: "M39", cat: "weapon", price: 50, amount: 1, img: "rifle.m39.png" },
-        { name: "СКС", cat: "weapon", price: 50, amount: 1, img: "rifle.sks.png" },
-        { name: "MP5", cat: "weapon", price: 50, amount: 1, img: "smg.mp5.png" },
-        { name: "Томпсон", cat: "weapon", price: 40, amount: 1, img: "smg.thompson.png" },
-        { name: "Берданка", cat: "weapon", price: 35, amount: 1, img: "rifle.semiauto.png" },
-        { name: "Самодельный СМГ", cat: "weapon", price: 35, amount: 1, img: "smg.2.png" },
-        { name: "M4 дробовик", cat: "weapon", price: 50, amount: 1, img: "shotgun.m4.png" },
-        { name: "Спас-дробовик", cat: "weapon", price: 50, amount: 1, img: "shotgun.spas12.png" },
-        { name: "Помповый дробовик", cat: "weapon", price: 30, amount: 1, img: "shotgun.pump.png" },
-        { name: "Двушка (Eoka)", cat: "weapon", price: 15, amount: 1, img: "shotgun.double.png" },
-        { name: "Крупнокалиберный револьвер", cat: "weapon", price: 25, amount: 1, img: "revolver.hc.png" },
-        { name: "Револьвер", cat: "weapon", price: 15, amount: 1, img: "pistol.revolver.png" },
-        { name: "Питон", cat: "weapon", price: 25, amount: 1, img: "pistol.python.png" },
-        { name: "Огнемёт", cat: "weapon", price: 30, amount: 1, img: "flamethrower.png" },
-        { name: "Прицел 8x", cat: "weapon", price: 25, amount: 1, img: "weapon.mod.8x.scope.png" },
-        { name: "Военный глушитель", cat: "weapon", price: 20, amount: 1, img: "weapon.mod.silencer.png" },
-        { name: "Увеличенный магазин", cat: "weapon", price: 10, amount: 1, img: "weapon.mod.extendedmags.png" },
-        { name: "Колиматорный прицел", cat: "weapon", price: 10, amount: 1, img: "weapon.mod.holosight.png" },
-        { name: "Лазерный прицел", cat: "weapon", price: 10, amount: 1, img: "weapon.mod.lasersight.png" },
-        { name: "Дульный тормоз", cat: "weapon", price: 10, amount: 1, img: "weapon.mod.muzzlebrake.png" },
-        { name: "Оружейный фонарик", cat: "weapon", price: 5, amount: 1, img: "weapon.mod.flashlight.png" },
-        { name: "Патроны 5.56", cat: "ammo", price: 30, amount: 256, img: "ammo.rifle.png" },
-        { name: "Скоростные 5.56", cat: "ammo", price: 35, amount: 256, img: "ammo.rifle.hv.png" },
-        { name: "Зажигательные 5.56", cat: "ammo", price: 35, amount: 256, img: "ammo.rifle.incendiary.png" },
-        { name: "Пистолетные патроны", cat: "ammo", price: 25, amount: 256, img: "ammo.pistol.png" },
-        { name: "Скоростные пистолетные", cat: "ammo", price: 30, amount: 256, img: "ammo.pistol.hv.png" },
-        { name: "Зажигательные пистолетные", cat: "ammo", price: 35, amount: 256, img: "ammo.pistol.fire.png" },
-        { name: "Дробь 12мм", cat: "ammo", price: 20, amount: 32, img: "ammo.shotgun.png" },
-        { name: "Пули 12мм", cat: "ammo", price: 20, amount: 32, img: "ammo.shotgun.slug.png" },
-        { name: "Зажигательные 12мм", cat: "ammo", price: 35, amount: 32, img: "ammo.shotgun.fire.png" },
-        { name: "Стрелы", cat: "ammo", price: 15, amount: 64, img: "arrow.wooden.png" },
-        { name: "Скоростные стрелы", cat: "ammo", price: 15, amount: 64, img: "arrow.hv.png" },
-        { name: "Тестовый генератор", cat: "electricity", price: 150, amount: 1, img: "electric.generator.small.png" },
-        { name: "Ветрогенератор", cat: "electricity", price: 50, amount: 1, img: "generator.wind.scrap.png" },
-        { name: "Солнечная панель", cat: "electricity", price: 20, amount: 1, img: "electric.solarpanel.large.png" },
-        { name: "Большой аккумулятор", cat: "electricity", price: 25, amount: 1, img: "electric.battery.rechargable.large.png" },
-        { name: "Малый генератор", cat: "electricity", price: 25, amount: 1, img: "electric.fuelgenerator.small.png" },
-        { name: "Компьютерная станция", cat: "electricity", price: 30, amount: 1, img: "computerstation.png" },
-        { name: "Зенитная турель", cat: "traps", price: 50, amount: 1, img: "samsite.png" },
-        { name: "Автоматическая турель", cat: "traps", price: 40, amount: 1, img: "autoturret.png" },
-        { name: "Ловушка с дробовиком", cat: "traps", price: 25, amount: 1, img: "guntrap.png" },
-        { name: "Бензопила", cat: "tools", price: 30, amount: 1, img: "chainsaw.png" },
-        { name: "Бур", cat: "tools", price: 30, amount: 1, img: "jackhammer.png" },
-        { name: "Ледоруб", cat: "tools", price: 15, amount: 1, img: "icepick.salvaged.png" },
-        { name: "Самодельный топор", cat: "tools", price: 15, amount: 1, img: "axe.salvaged.png" },
-        { name: "Антирад", cat: "armor", price: 30, amount: 1, img: "hazmatsuit.png" },
-        { name: "Шприцы", cat: "medical", price: 10, amount: 4, img: "syringe.medical.png" },
-        { name: "Очки ночного видения", cat: "armor", price: 30, amount: 1, img: "nightvisiongoggles.png" },
-        { name: "Железная маска", cat: "armor", price: 30, amount: 1, img: "metal.facemask.png" },
-        { name: "Железный нагрудник", cat: "armor", price: 30, amount: 1, img: "metal.plate.torso.png" },
-        { name: "Тактические перчатки", cat: "armor", price: 15, amount: 1, img: "tactical.gloves.png" },
-        { name: "Шлем из кофейной банки", cat: "armor", price: 15, amount: 1, img: "coffeecan.helmet.png" },
-        { name: "Броня из дорожных знаков", cat: "armor", price: 15, amount: 1, img: "roadsign.jacket.png" },
-        { name: "Килт из дорожных знаков", cat: "armor", price: 15, amount: 1, img: "roadsign.kilt.png" },
-        { name: "Тяжёлый пуленепробиваемый шлем", cat: "armor", price: 20, amount: 1, img: "heavy.plate.helmet.png" },
-        { name: "Тяжёлый пуленепробиваемый нагрудник", cat: "armor", price: 20, amount: 1, img: "heavy.plate.jacket.png" },
-        { name: "Тяжёлые пуленепробиваемые штаны", cat: "armor", price: 20, amount: 1, img: "heavy.plate.pants.png" },
-        { name: "Деревянная лестница", cat: "building", price: 10, amount: 1, img: "wood_ladder_short.png" },
-        { name: "Бронированная дверь", cat: "building", price: 30, amount: 1, img: "door.hinged.toptier.png" },
-        { name: "Бронированная двойная дверь", cat: "building", price: 30, amount: 1, img: "door.double.hinged.toptier.png" },
-        { name: "Лестничный люк", cat: "building", price: 25, amount: 1, img: "floor.ladder.hatch.png" },
-        { name: "Треугольный люк", cat: "building", price: 25, amount: 1, img: "floor.triangle.ladder.hatch.png" },
-        { name: "Гаражная дверь", cat: "building", price: 15, amount: 1, img: "wall.frame.garagedoor.png" },
-        { name: "Металлические баррикады", cat: "building", price: 25, amount: 5, img: "barricade.metal.png" },
-        { name: "Печь", cat: "building", price: 10, amount: 1, img: "furnace.png" },
-        { name: "Малый НПЗ", cat: "building", price: 35, amount: 1, img: "small.oil.refinery.png" },
-        { name: "Большая печь", cat: "building", price: 30, amount: 1, img: "furnace.large.png" },
-        { name: "Шкаф для переодевания", cat: "building", price: 10, amount: 1, img: "locker.png" },
-        { name: "Кровать", cat: "building", price: 10, amount: 1, img: "bed.png" },
-        { name: "Гроб", cat: "building", price: 10, amount: 1, img: "coffin.storage.png" }
-    ];
-
-    function getIconUrl(imgName) {
-        if (!imgName) return "https://cdn.thisisrust.net/items/256/wood.png";
-        return `https://cdn.thisisrust.net/items/256/${imgName}`;
-    }
-
-    let currentCategory = "all";
-    let searchQuery = "";
-
-    const copyModal = document.getElementById('copyModal');
-    const copyCommentText = document.getElementById('copyCommentText');
-    const copyModalOkBtn = document.getElementById('copyModalOkBtn');
-    const copyModalClose = document.getElementById('copyModalClose');
-    let pendingDonationUrl = null;
-
-    copyModalOkBtn.addEventListener('click', () => {
-        copyModal.style.display = 'none';
-        if (pendingDonationUrl) {
-            window.open(pendingDonationUrl, '_blank');
-            pendingDonationUrl = null;
-        }
-    });
-
-    copyModalClose.addEventListener('click', () => {
-        copyModal.style.display = 'none';
-        pendingDonationUrl = null;
-    });
-
-    function showCopyModal(comment, price) {
-        copyCommentText.innerHTML = `✅ Комментарий скопирован в буфер!<br><br><strong>${comment}</strong><br><br>Сумма: ${price} ₽`;
-        copyModal.style.display = 'flex';
-    }
-
-    function renderShop() {
-        const grid = document.getElementById('shopGrid');
-        let filtered = items.filter(i => {
-            if (currentCategory !== "all" && i.cat !== currentCategory) return false;
-            if (searchQuery && !i.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-            return true;
-        });
-        grid.innerHTML = filtered.map(item => `
-            <div class="shop-item" data-price="${item.price}" data-name="${item.name}" data-amount="${item.amount}">
-                <div class="item-price">${item.price} ₽</div>
-                ${item.amount > 1 ? `<div class="item-amount">x${item.amount}</div>` : ''}
-                <img class="item-icon" src="${getIconUrl(item.img)}" loading="lazy" alt="${item.name}">
-            </div>
-        `).join('');
-        attachBuyEvents();
-    }
-
-    function attachBuyEvents() {
-        document.querySelectorAll('.shop-item').forEach(el => {
-            el.addEventListener('click', () => {
-                if (!currentSteamId) {
-                    alert('Сохраните SteamID в поле выше');
-                    return;
-                }
-                const price = parseInt(el.dataset.price);
-                const name = el.dataset.name;
-                const amount = parseInt(el.dataset.amount);
-                const comment = `Куплю: ${name} x${amount} SteamID: ${currentSteamId}`;
-                navigator.clipboard.writeText(comment).then(() => {
-                    pendingDonationUrl = 'https://www.donationalerts.com/r/mental__rust';
-                    showCopyModal(comment, price);
-                }).catch(() => {
-                    alert('Не удалось скопировать комментарий. Скопируйте вручную: ' + comment);
-                    window.open('https://www.donationalerts.com/r/mental__rust', '_blank');
-                });
-            });
-        });
-    }
-
-    function initFilters() {
-        const btns = document.querySelectorAll('.filter-btn');
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                btns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCategory = btn.dataset.cat;
-                renderShop();
-            });
-        });
-    }
-
-    function initSearch() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderShop();
-        });
-    }
-
-    function updateWipe() {
-        const now = new Date();
-        let nextFriday = new Date();
-        nextFriday.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7));
-        nextFriday.setHours(15, 0, 0, 0);
-        if (nextFriday <= now) nextFriday.setDate(nextFriday.getDate() + 7);
-        const diff = nextFriday - now;
-        const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const secs = Math.floor((diff % 60000) / 1000);
-        document.getElementById('countdown').innerText = `${days}д ${hours}ч ${minutes}м ${secs}с`;
-        document.getElementById('wipeDate').innerText = nextFriday.toLocaleDateString('ru-RU') + ' 15:00';
-    }
-
+    // Копирование IP
     document.getElementById('copyIpBtn').addEventListener('click', () => {
         navigator.clipboard.writeText("213.230.109.15:22015");
         alert('IP скопирован');
     });
 
-    // Модальные окна (О сервере, Правила)
+    // Таймер вайпа (каждую пятницу 15:00 МСК)
+    function getNextFriday() {
+        const now = new Date();
+        let days = (5 - now.getDay() + 7) % 7;
+        if (days === 0 && now.getHours() >= 15) days = 7;
+        const next = new Date(now);
+        next.setDate(now.getDate() + days);
+        next.setHours(15, 0, 0, 0);
+        return next;
+    }
+    function updateWipe() {
+        const wipe = getNextFriday();
+        const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+        const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+        document.getElementById('wipeDate').innerText = `${days[wipe.getDay()]}, ${wipe.getDate()} ${months[wipe.getMonth()]} ${wipe.getFullYear()} ${wipe.getHours()}:${String(wipe.getMinutes()).padStart(2,'0')} МСК`;
+        const diff = wipe - new Date();
+        if (diff <= 0) document.getElementById('countdown').innerText = "Вайп идёт!";
+        else {
+            const d = Math.floor(diff / 864e5), h = Math.floor((diff % 864e5) / 36e5), m = Math.floor((diff % 36e5) / 6e4), s = Math.floor((diff % 6e4) / 1e3);
+            document.getElementById('countdown').innerText = `${d}д ${h}ч ${m}м ${s}с`;
+        }
+    }
+    updateWipe();
+    setInterval(updateWipe, 1000);
+
+    // Модальные окна
     const modalAbout = document.getElementById('modalAbout');
     const modalRules = document.getElementById('modalRules');
+    const navShop = document.getElementById('navShop');
     const navAbout = document.getElementById('navAbout');
     const navRules = document.getElementById('navRules');
-    const navShop = document.getElementById('navShop');
     const closeBtns = document.querySelectorAll('.close-modal');
 
     function openModal(modal) { modal.style.display = 'flex'; }
@@ -703,7 +299,9 @@
 
     navAbout.addEventListener('click', () => openModal(modalAbout));
     navRules.addEventListener('click', () => openModal(modalRules));
-    navShop.addEventListener('click', () => document.getElementById('shopGrid').scrollIntoView({ behavior: 'smooth' }));
+    navShop.addEventListener('click', () => {
+        window.open('https://mental-rust.gamestores.app/', '_blank');
+    });
 
     closeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -716,12 +314,6 @@
         if (e.target === modalAbout) closeModal(modalAbout);
         if (e.target === modalRules) closeModal(modalRules);
     });
-
-    initFilters();
-    initSearch();
-    renderShop();
-    updateWipe();
-    setInterval(updateWipe, 1000);
 </script>
 </body>
 </html>
