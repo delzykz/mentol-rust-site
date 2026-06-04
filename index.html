@@ -265,8 +265,8 @@
             position: relative;
         }
         .copy-modal-content p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            margin-bottom: 12px;
             word-break: break-word;
         }
         .copy-modal-content button {
@@ -302,7 +302,7 @@
             .shop-grid { gap: 20px; }
             .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
             .steam-input { width: 160px; }
-            .copy-modal-content p { font-size: 0.9rem; }
+            .copy-modal-content p { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -416,7 +416,8 @@
 <div id="copyModal" class="copy-modal">
     <div class="copy-modal-content">
         <button class="copy-modal-close" id="copyModalClose">✕</button>
-        <p id="copyCommentText">✅ Комментарий скопирован!</p>
+        <p id="copyCommentText">✅ Комментарий скопирован в буфер!</p>
+        <p><strong>Вставьте скопированный комментарий в поле "Сообщение" на DonationAlerts.</strong></p>
         <p><strong>Ожидайте выдачу предмета, предмет появится в /claim</strong></p>
         <div>
             <button id="copyModalOkBtn">ОК → DonationAlerts</button>
