@@ -87,6 +87,25 @@
             border: 1px solid #2ecc71;
             flex-wrap: wrap;
         }
+        .steamid-panel {
+            background: #1c2c22;
+            border-radius: 60px;
+            padding: 10px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .steam-input {
+            background: #0a0f0c;
+            border: 1px solid #2ecc71;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: white;
+            width: 220px;
+        }
         .search-bar {
             margin: 20px 0 10px;
             display: flex;
@@ -100,7 +119,6 @@
             width: 280px;
             color: #dbefe2;
             font-size: 0.9rem;
-            transition: 0.2s;
         }
         .search-input:focus {
             outline: none;
@@ -225,6 +243,7 @@
         @media (max-width: 800px) {
             .shop-grid { gap: 20px; }
             .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
+            .steam-input { width: 160px; }
         }
     </style>
 </head>
@@ -249,6 +268,16 @@
             <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
             <div class="online-badge"><span class="green-dot"></span>🟢 Сервер работает</div>
         </div>
+    </div>
+
+    <!-- Панель SteamID -->
+    <div class="steamid-panel">
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <span>🔑 SteamID:</span>
+            <input type="text" id="steamIdInput" class="steam-input" placeholder="17 цифр">
+            <button id="saveSteamBtn" class="copy-btn">Сохранить</button>
+        </div>
+        <div>💡 ID сохраняется в браузере</div>
     </div>
 
     <div class="wipe-info">
@@ -277,7 +306,7 @@
     </div>
 
     <div id="shopGrid" class="shop-grid"></div>
-    <p style="text-align:center;">💰 При оплате УКАЖИТЕ СВОЙ STEAMID в комментарии!<br>💬 После покупки напишите администратору в Discord для выдачи.</p>
+    <p style="text-align:center;">💰 При оплате ваш SteamID подставится автоматически.<br>💬 После доната предмет выдаётся автоматически (или администратором).</p>
 </div>
 
 <!-- Модальные окна -->
@@ -332,7 +361,34 @@
 </footer>
 
 <script>
-    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК) ========================
+    // ======================== STEAMID ========================
+    let currentSteamId = localStorage.getItem('steamId');
+    const steamInput = document.getElementById('steamIdInput');
+    const saveBtn = document.getElementById('saveSteamBtn');
+
+    if (currentSteamId) steamInput.value = currentSteamId;
+
+    saveBtn.addEventListener('click', () => {
+        let id = steamInput.value.trim();
+        if (id && /^\d{17}$/.test(id)) {
+            localStorage.setItem('steamId', id);
+            currentSteamId = id;
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = '✅ Сохранено';
+            setTimeout(() => {
+                saveBtn.textContent = originalText;
+            }, 2000);
+            steamInput.style.border = '1px solid #2ecc71';
+        } else {
+            alert('Введите корректный SteamID (17 цифр)');
+            steamInput.style.border = '1px solid #ff5722';
+            setTimeout(() => {
+                steamInput.style.border = '1px solid #2ecc71';
+            }, 2000);
+        }
+    });
+
+    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК 150+) ========================
     const items = [
         { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, img: "largebackpack.png" },
         { name: "Древесина", cat: "resource", price: 5, amount: 1000, img: "wood.png" },
@@ -368,7 +424,7 @@
         { name: "Чистый рудный чай", cat: "food", price: 15, amount: 1, img: "oretea.pure.png" },
         { name: "Чистый древесный чай", cat: "food", price: 15, amount: 1, img: "woodtea.pure.png" },
         { name: "Чай на макс здоровье", cat: "medical", price: 15, amount: 1, img: "maxhealthtea.pure.png" },
-        { name: "Чай на металлолом", cat: "food", price: 20, amount: 1, img: "scrap.png" },
+        { name: "Чай на металлолом", cat: "food", price: 20, amount: 1, img: "scraptea.pure.png" },
         { name: "Сигнальная граната", cat: "ammo", price: 40, amount: 1, img: "f1_grenade_icon.png" },
         { name: "Гранаты F1", cat: "ammo", price: 15, amount: 5, img: "f1_grenade_icon.png" },
         { name: "C4", cat: "ammo", price: 200, amount: 5, img: "explosive.timed.png" },
@@ -426,7 +482,7 @@
         { name: "Бур", cat: "tools", price: 30, amount: 1, img: "jackhammer.png" },
         { name: "Ледоруб", cat: "tools", price: 15, amount: 1, img: "icepick.salvaged.png" },
         { name: "Самодельный топор", cat: "tools", price: 15, amount: 1, img: "axe.salvaged.png" },
-        { name: "Антирад", cat: "medical", price: 30, amount: 1, img: "hazmatsuit.png" },
+        { name: "Антирад", cat: "medical", price: 30, amount: 1, img: "syringe.medical.png" },
         { name: "Шприцы", cat: "medical", price: 10, amount: 4, img: "syringe.medical.png" },
         { name: "Очки ночного видения", cat: "armor", price: 30, amount: 1, img: "nightvisiongoggles.png" },
         { name: "Железная маска", cat: "armor", price: 30, amount: 1, img: "metal.facemask.png" },
@@ -481,11 +537,14 @@
     function attachBuyEvents() {
         document.querySelectorAll('.shop-item').forEach(el => {
             el.addEventListener('click', () => {
+                if (!currentSteamId) {
+                    alert('Сохраните SteamID в поле выше');
+                    return;
+                }
                 const price = parseInt(el.dataset.price);
                 const name = el.dataset.name;
                 const amount = parseInt(el.dataset.amount);
-                // ЗАМЕНИТЕ 'mental_rust' НА ВАШ АККАУНТ В DONATIONALERTS
-                const url = `https://www.donationalerts.com/r/mental_rust?amount=${price}&comment=Куплю: ${encodeURIComponent(name)} x${amount} (укажите SteamID)`;
+                const url = `https://www.donationalerts.com/r/mental__rust?amount=${price}&comment=Куплю: ${encodeURIComponent(name)} x${amount} SteamID: ${currentSteamId}`;
                 window.open(url, '_blank');
             });
         });
