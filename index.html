@@ -6,7 +6,7 @@
     <title>Mental Rust | Донат магазин</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        /* Стили (без изменений, такие же как в предыдущей рабочей версии) */
+        /* Стили без изменений (оставлены такими же, как в предыдущей версии) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0f0c; font-family: 'Inter', sans-serif; color: #dbefe2; line-height: 1.5; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
@@ -271,7 +271,6 @@
         </div>
     </div>
 
-    <!-- Панель SteamID -->
     <div class="steamid-panel">
         <div style="display: flex; gap: 10px; align-items: center;">
             <span>🔑 SteamID:</span>
@@ -307,7 +306,7 @@
     </div>
 
     <div id="shopGrid" class="shop-grid"></div>
-    <p style="text-align:center;">💰 При оплате ваш SteamID подставится автоматительно.<br>💬 После доната предмет выдаётся автоматически (или администратором).</p>
+    <p style="text-align:center;">💰 При оплате ваш SteamID подставится автоматически.<br>💬 После доната предмет выдаётся автоматически (или администратором).</p>
 </div>
 
 <!-- Модальные окна (без изменений) -->
@@ -389,7 +388,7 @@
         }
     });
 
-    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК 150+ С ИСПРАВЛЕНИЯМИ) ========================
+    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК С ИСПРАВЛЕНИЕМ АНТИРАДА) ========================
     const items = [
         { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, img: "largebackpack.png" },
         { name: "Древесина", cat: "resource", price: 5, amount: 1000, img: "wood.png" },
@@ -424,11 +423,8 @@
         { name: "Дорожный знак", cat: "components", price: 3, amount: 1, img: "roadsigns.png" },
         { name: "Чистый рудный чай", cat: "food", price: 15, amount: 1, img: "oretea.pure.png" },
         { name: "Чистый древесный чай", cat: "food", price: 15, amount: 1, img: "woodtea.pure.png" },
-        // Перенос "Чай на макс здоровье" из medical в food
         { name: "Чай на макс здоровье", cat: "food", price: 15, amount: 1, img: "maxhealthtea.pure.png" },
-        // "Чай на металлолом" исправлена иконка
         { name: "Чай на металлолом", cat: "food", price: 20, amount: 1, img: "scraptea.pure.png" },
-        // "Сигнальная граната" исправлена иконка
         { name: "Сигнальная граната", cat: "ammo", price: 40, amount: 1, img: "supply.signal.png" },
         { name: "Гранаты F1", cat: "ammo", price: 15, amount: 5, img: "f1_grenade_icon.png" },
         { name: "C4", cat: "ammo", price: 200, amount: 5, img: "explosive.timed.png" },
@@ -486,15 +482,14 @@
         { name: "Бур", cat: "tools", price: 30, amount: 1, img: "jackhammer.png" },
         { name: "Ледоруб", cat: "tools", price: 15, amount: 1, img: "icepick.salvaged.png" },
         { name: "Самодельный топор", cat: "tools", price: 15, amount: 1, img: "axe.salvaged.png" },
-        { name: "Антирад", cat: "medical", price: 30, amount: 1, img: "syringe.medical.png" },
+        // ИСПРАВЛЕНИЕ: Антирад теперь в одежде с иконкой hazmatsuit.png
+        { name: "Антирад", cat: "armor", price: 30, amount: 1, img: "hazmatsuit.png" },
         { name: "Шприцы", cat: "medical", price: 10, amount: 4, img: "syringe.medical.png" },
         { name: "Очки ночного видения", cat: "armor", price: 30, amount: 1, img: "nightvisiongoggles.png" },
         { name: "Железная маска", cat: "armor", price: 30, amount: 1, img: "metal.facemask.png" },
         { name: "Железный нагрудник", cat: "armor", price: 30, amount: 1, img: "metal.plate.torso.png" },
         { name: "Тактические перчатки", cat: "armor", price: 15, amount: 1, img: "tactical.gloves.png" },
         { name: "Шлем из кофейной банки", cat: "armor", price: 15, amount: 1, img: "coffeecan.helmet.png" },
-        // ДОБАВЛЕН "Защитный костюм" (хазик) в категорию "armor"
-        { name: "Защитный костюм", cat: "armor", price: 30, amount: 1, img: "hazmatsuit.png" },
         { name: "Броня из дорожных знаков", cat: "armor", price: 15, amount: 1, img: "roadsign.jacket.png" },
         { name: "Килт из дорожных знаков", cat: "armor", price: 15, amount: 1, img: "roadsign.kilt.png" },
         { name: "Тяжёлый пуленепробиваемый шлем", cat: "armor", price: 20, amount: 1, img: "heavy.plate.helmet.png" },
