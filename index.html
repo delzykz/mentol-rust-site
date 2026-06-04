@@ -241,29 +241,53 @@
             cursor: pointer;
             color: #fff;
         }
-        .toast {
+        /* Красное модальное окно для уведомления о копировании */
+        .copy-modal {
+            display: none;
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #2ecc71;
-            color: #0a0f0c;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: bold;
-            z-index: 1001;
-            white-space: nowrap;
-            animation: fadeOut 3s forwards;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            70% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+        .copy-modal-content {
+            background: #ff3333;
+            color: white;
+            text-align: center;
+            padding: 30px 40px;
+            border-radius: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+        .copy-modal-content p {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+        .copy-modal-content button {
+            background: white;
+            color: #ff3333;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copy-modal-content button:hover {
+            transform: scale(1.05);
         }
         @media (max-width: 800px) {
             .shop-grid { gap: 20px; }
             .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
             .steam-input { width: 160px; }
+            .copy-modal-content p { font-size: 1rem; }
         }
     </style>
 </head>
@@ -325,10 +349,10 @@
     </div>
 
     <div id="shopGrid" class="shop-grid"></div>
-    <p style="text-align:center;">💰 При нажатии на товар скопируется комментарий. Перейдите в DonationAlerts, вставьте комментарий и укажите сумму.</p>
+    <p style="text-align:center;">💰 При нажатии на товар откроется окно с копированием комментария.</p>
 </div>
 
-<!-- Модальные окна -->
+<!-- Модальные окна (О сервере, Правила) -->
 <div id="modalAbout" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -374,6 +398,14 @@
     </div>
 </div>
 
+<!-- Красное модальное окно для копирования -->
+<div id="copyModal" class="copy-modal">
+    <div class="copy-modal-content">
+        <p id="copyCommentText">Комментарий скопирован!</p>
+        <button id="copyModalOkBtn">ОК</button>
+    </div>
+</div>
+
 <footer class="footer">
     <p>© 2026 Mental Rust — рейты 2x, глобальный вайп каждую пятницу 15:00 МСК</p>
     <p>💬 Discord: <a href="https://discord.gg/GtEnCGj76Y" target="_blank" style="color:#2ecc71;">discord.gg/GtEnCGj76Y</a></p>
@@ -407,7 +439,7 @@
         }
     });
 
-    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК 150+ ПРЕДМЕТОВ) ========================
+    // ======================== ТОВАРЫ (полный список 150+) ========================
     const items = [
         { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, img: "largebackpack.png" },
         { name: "Древесина", cat: "resource", price: 5, amount: 1000, img: "wood.png" },
@@ -536,14 +568,23 @@
     let currentCategory = "all";
     let searchQuery = "";
 
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerText = message;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            if (toast.parentNode) toast.parentNode.removeChild(toast);
-        }, 3000);
+    // Элементы красного модального окна
+    const copyModal = document.getElementById('copyModal');
+    const copyCommentText = document.getElementById('copyCommentText');
+    const copyModalOkBtn = document.getElementById('copyModalOkBtn');
+    let pendingDonationUrl = null;
+
+    copyModalOkBtn.addEventListener('click', () => {
+        copyModal.style.display = 'none';
+        if (pendingDonationUrl) {
+            window.open(pendingDonationUrl, '_blank');
+            pendingDonationUrl = null;
+        }
+    });
+
+    function showCopyModal(comment, price) {
+        copyCommentText.innerHTML = `✅ Комментарий скопирован!<br><br><strong>${comment}</strong><br><br>Сумма: ${price} ₽`;
+        copyModal.style.display = 'flex';
     }
 
     function renderShop() {
@@ -575,8 +616,8 @@
                 const amount = parseInt(el.dataset.amount);
                 const comment = `Куплю: ${name} x${amount} SteamID: ${currentSteamId}`;
                 navigator.clipboard.writeText(comment).then(() => {
-                    showToast(`✅ Комментарий скопирован! Сумма: ${price} ₽. Перейдите в DonationAlerts, вставьте комментарий и укажите сумму.`);
-                    window.open('https://www.donationalerts.com/r/mental__rust', '_blank');
+                    pendingDonationUrl = 'https://www.donationalerts.com/r/mental__rust';
+                    showCopyModal(comment, price);
                 }).catch(() => {
                     alert('Не удалось скопировать комментарий. Скопируйте вручную: ' + comment);
                     window.open('https://www.donationalerts.com/r/mental__rust', '_blank');
@@ -625,7 +666,7 @@
         alert('IP скопирован');
     });
 
-    // Модальные окна
+    // Модальные окна (О сервере, Правила)
     const modalAbout = document.getElementById('modalAbout');
     const modalRules = document.getElementById('modalRules');
     const navAbout = document.getElementById('navAbout');
