@@ -6,7 +6,6 @@
     <title>Mental Rust | Донат магазин</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        /* ========== СТИЛИ (без изменений, но добавлен блок гайда) ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0f0c; font-family: 'Inter', sans-serif; color: #dbefe2; line-height: 1.5; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
@@ -108,21 +107,6 @@
             color: white;
             width: 220px;
         }
-        .guide-block {
-            background: #1e2f26;
-            border-left: 6px solid #2ecc71;
-            border-radius: 20px;
-            padding: 15px 25px;
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .guide-text h3 { color: #2ecc71; margin-bottom: 5px; font-size: 1.2rem; }
-        .guide-text p { margin: 0; font-size: 0.9rem; }
-        .guide-steps { display: flex; gap: 25px; flex-wrap: wrap; font-size: 0.9rem; }
-        .guide-steps span { background: #2c3e2f; padding: 5px 12px; border-radius: 30px; }
         .search-bar {
             margin: 20px 0 10px;
             display: flex;
@@ -273,38 +257,52 @@
             background: #ff3333;
             color: white;
             text-align: center;
-            padding: 30px 40px;
+            padding: 25px 30px;
             border-radius: 30px;
             max-width: 500px;
             width: 90%;
             box-shadow: 0 0 20px rgba(255,0,0,0.5);
+            position: relative;
         }
         .copy-modal-content p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
             word-break: break-word;
         }
         .copy-modal-content button {
             background: white;
             color: #ff3333;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            padding: 10px 30px;
+            padding: 8px 20px;
             border-radius: 50px;
             cursor: pointer;
             transition: 0.2s;
+            margin: 0 5px;
         }
         .copy-modal-content button:hover {
             transform: scale(1.05);
+        }
+        .copy-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+        }
+        .copy-modal-close:hover {
+            color: #ddd;
         }
         @media (max-width: 800px) {
             .shop-grid { gap: 20px; }
             .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
             .steam-input { width: 160px; }
             .copy-modal-content p { font-size: 0.9rem; }
-            .guide-steps { gap: 10px; margin-top: 10px; }
-            .guide-block { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -338,25 +336,6 @@
             <button id="saveSteamBtn" class="copy-btn">Сохранить</button>
         </div>
         <div>💡 ID сохраняется в браузере</div>
-    </div>
-
-    <!-- МИНИ-ГАЙД -->
-    <div class="guide-block">
-        <div class="guide-text">
-            <h3>📖 Как купить предмет</h3>
-            <p>1. Сохраните свой SteamID (17 цифр) в поле выше.<br>
-            2. Нажмите на любой товар – откроется окно с комментарием.<br>
-            3. Нажмите «ОК» – вы перейдёте на DonationAlerts, где комментарий уже скопирован.<br>
-            4. Вставьте комментарий в поле «Сообщение», укажите сумму и оплатите.<br>
-            5. После оплаты напишите администратору в Discord – предмет будет выдан.</p>
-        </div>
-        <div class="guide-steps">
-            <span>✅ SteamID →</span>
-            <span>🛒 Клик по товару →</span>
-            <span>📋 Копирование →</span>
-            <span>💸 Оплата →</span>
-            <span>🎁 Выдача</span>
-        </div>
     </div>
 
     <div class="wipe-info">
@@ -436,8 +415,12 @@
 <!-- Красное модальное окно для копирования -->
 <div id="copyModal" class="copy-modal">
     <div class="copy-modal-content">
+        <button class="copy-modal-close" id="copyModalClose">✕</button>
         <p id="copyCommentText">✅ Комментарий скопирован!</p>
-        <button id="copyModalOkBtn">ОК → DonationAlerts</button>
+        <p><strong>Ожидайте выдачу предмета, предмет появится в /claim</strong></p>
+        <div>
+            <button id="copyModalOkBtn">ОК → DonationAlerts</button>
+        </div>
     </div>
 </div>
 
@@ -606,6 +589,7 @@
     const copyModal = document.getElementById('copyModal');
     const copyCommentText = document.getElementById('copyCommentText');
     const copyModalOkBtn = document.getElementById('copyModalOkBtn');
+    const copyModalClose = document.getElementById('copyModalClose');
     let pendingDonationUrl = null;
 
     copyModalOkBtn.addEventListener('click', () => {
@@ -614,6 +598,11 @@
             window.open(pendingDonationUrl, '_blank');
             pendingDonationUrl = null;
         }
+    });
+
+    copyModalClose.addEventListener('click', () => {
+        copyModal.style.display = 'none';
+        pendingDonationUrl = null;
     });
 
     function showCopyModal(comment, price) {
