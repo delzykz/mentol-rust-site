@@ -6,7 +6,6 @@
     <title>Mental Rust | Донат магазин</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        /* Стили без изменений (оставлены такими же, как в предыдущей версии) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0f0c; font-family: 'Inter', sans-serif; color: #dbefe2; line-height: 1.5; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
@@ -34,7 +33,7 @@
             -webkit-background-clip: text;
             color: transparent;
         }
-        .nav-links { display: flex; gap: 28px; }
+        .nav-links { display: flex; gap: 28px; flex-wrap: wrap; }
         .nav-links button, .nav-links a {
             background: none;
             border: none;
@@ -52,6 +51,7 @@
             border: 1px solid #2ecc7160;
             border-radius: 60px;
             display: inline-flex;
+            align-items: center;
             gap: 12px;
             padding: 6px 20px;
             flex-wrap: wrap;
@@ -241,6 +241,25 @@
             cursor: pointer;
             color: #fff;
         }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2ecc71;
+            color: #0a0f0c;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            z-index: 1001;
+            white-space: nowrap;
+            animation: fadeOut 3s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
         @media (max-width: 800px) {
             .shop-grid { gap: 20px; }
             .shop-item::after { font-size: 0.7rem; padding: 2px 8px; margin-top: 4px; }
@@ -306,10 +325,10 @@
     </div>
 
     <div id="shopGrid" class="shop-grid"></div>
-    <p style="text-align:center;">💰 При оплате ваш SteamID подставится автоматически.<br>💬 После доната предмет выдаётся автоматически (или администратором).</p>
+    <p style="text-align:center;">💰 При нажатии на товар скопируется комментарий. Перейдите в DonationAlerts, вставьте комментарий и укажите сумму.</p>
 </div>
 
-<!-- Модальные окна (без изменений) -->
+<!-- Модальные окна -->
 <div id="modalAbout" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -388,7 +407,7 @@
         }
     });
 
-    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК С ИСПРАВЛЕНИЕМ АНТИРАДА) ========================
+    // ======================== ТОВАРЫ (ПОЛНЫЙ СПИСОК 150+ ПРЕДМЕТОВ) ========================
     const items = [
         { name: "Большой рюкзак", cat: "items", price: 30, amount: 1, img: "largebackpack.png" },
         { name: "Древесина", cat: "resource", price: 5, amount: 1000, img: "wood.png" },
@@ -482,7 +501,6 @@
         { name: "Бур", cat: "tools", price: 30, amount: 1, img: "jackhammer.png" },
         { name: "Ледоруб", cat: "tools", price: 15, amount: 1, img: "icepick.salvaged.png" },
         { name: "Самодельный топор", cat: "tools", price: 15, amount: 1, img: "axe.salvaged.png" },
-        // ИСПРАВЛЕНИЕ: Антирад теперь в одежде с иконкой hazmatsuit.png
         { name: "Антирад", cat: "armor", price: 30, amount: 1, img: "hazmatsuit.png" },
         { name: "Шприцы", cat: "medical", price: 10, amount: 4, img: "syringe.medical.png" },
         { name: "Очки ночного видения", cat: "armor", price: 30, amount: 1, img: "nightvisiongoggles.png" },
@@ -518,6 +536,16 @@
     let currentCategory = "all";
     let searchQuery = "";
 
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 3000);
+    }
+
     function renderShop() {
         const grid = document.getElementById('shopGrid');
         let filtered = items.filter(i => {
@@ -545,8 +573,14 @@
                 const price = parseInt(el.dataset.price);
                 const name = el.dataset.name;
                 const amount = parseInt(el.dataset.amount);
-                const url = `https://www.donationalerts.com/r/mental__rust?amount=${price}&comment=Куплю: ${encodeURIComponent(name)} x${amount} SteamID: ${currentSteamId}`;
-                window.open(url, '_blank');
+                const comment = `Куплю: ${name} x${amount} SteamID: ${currentSteamId}`;
+                navigator.clipboard.writeText(comment).then(() => {
+                    showToast(`✅ Комментарий скопирован! Сумма: ${price} ₽. Перейдите в DonationAlerts, вставьте комментарий и укажите сумму.`);
+                    window.open('https://www.donationalerts.com/r/mental__rust', '_blank');
+                }).catch(() => {
+                    alert('Не удалось скопировать комментарий. Скопируйте вручную: ' + comment);
+                    window.open('https://www.donationalerts.com/r/mental__rust', '_blank');
+                });
             });
         });
     }
