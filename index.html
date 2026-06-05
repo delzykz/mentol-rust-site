@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mental Rust | Информация о сервере</title>
+    <title>Mental Rust | Информационный сайт</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +34,7 @@
             color: transparent;
         }
         .nav-links { display: flex; gap: 28px; flex-wrap: wrap; }
-        .nav-links button, .nav-links a {
+        .nav-links a, .nav-links button {
             background: none;
             border: none;
             color: #c7f0d6;
@@ -44,10 +44,39 @@
             transition: 0.2s;
             text-decoration: none;
         }
-        .nav-links button:hover, .nav-links a:hover { color: #2ecc71; }
-        .hero { text-align: center; padding: 60px 0 40px; }
-        .hero h2 { font-size: 2.8rem; font-family: 'Bebas Neue', cursive; }
-        .hero p { max-width: 700px; margin: 20px auto; font-size: 1.1rem; color: #b9dfca; }
+        .nav-links a:hover, .nav-links button:hover { color: #2ecc71; }
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            font-family: 'Bebas Neue', cursive;
+        }
+        .hero p {
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 1.1rem;
+            color: #b9dfca;
+        }
+        .shop-button {
+            display: inline-block;
+            background: #ff5722;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 12px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.2s;
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+        }
+        .shop-button:hover {
+            background: #ff784e;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #ff5722;
+        }
         .ip-card {
             background: rgba(0,0,0,0.6);
             border: 1px solid #2ecc7160;
@@ -57,9 +86,13 @@
             gap: 12px;
             padding: 6px 20px;
             flex-wrap: wrap;
-            margin-top: 15px;
+            margin-top: 20px;
         }
-        .ip-card code { font-size: 1.2rem; font-weight: 700; color: #7ef0a6; }
+        .ip-card code {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #7ef0a6;
+        }
         .copy-btn {
             background: #1e874b;
             padding: 5px 15px;
@@ -79,7 +112,13 @@
             align-items: center;
             gap: 8px;
         }
-        .green-dot { width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 6px #2ecc71; }
+        .green-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #2ecc71;
+        }
         .wipe-info {
             display: flex;
             justify-content: space-between;
@@ -103,14 +142,22 @@
             border-radius: 24px;
             padding: 24px;
             border: 1px solid #2a5a3e;
+            transition: 0.2s;
         }
+        .feature-card:hover { border-color: #2ecc71; transform: translateY(-5px); }
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 12px;
             color: #5efc9a;
         }
         .feature-card p { color: #c8ecd9; }
-        .footer { text-align: center; padding: 30px 0; color: #91bba4; border-top: 1px solid #2a5a3e; margin-top: 40px; }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #91bba4;
+            border-top: 1px solid #2a5a3e;
+            margin-top: 40px;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -134,7 +181,11 @@
             border: 1px solid #2ecc71;
             position: relative;
         }
-        .modal-content h2 { color: #2ecc71; margin-bottom: 20px; font-family: 'Bebas Neue', cursive; }
+        .modal-content h2 {
+            color: #2ecc71;
+            margin-bottom: 20px;
+            font-family: 'Bebas Neue', cursive;
+        }
         .modal-content h3 { margin: 15px 0 10px; color: #f0b90b; }
         .modal-content p, .modal-content li { color: #dbefe2; margin-bottom: 8px; }
         .modal-content ul { padding-left: 20px; }
@@ -174,6 +225,7 @@
             <button class="copy-btn" id="copyIpBtn">📋 Копировать IP</button>
             <div class="online-badge"><span class="green-dot"></span>🟢 Сервер работает</div>
         </div>
+        <a href="https://mental-rust.gamestores.app/" target="_blank" class="shop-button">🛒 ПЕРЕЙТИ В МАГАЗИН</a>
     </div>
 
     <div class="wipe-info">
@@ -261,7 +313,7 @@
         alert('IP скопирован');
     });
 
-    // Таймер вайпа (каждую пятницу 15:00 МСК)
+    // Таймер вайпа
     function getNextFriday() {
         const now = new Date();
         let days = (5 - now.getDay() + 7) % 7;
